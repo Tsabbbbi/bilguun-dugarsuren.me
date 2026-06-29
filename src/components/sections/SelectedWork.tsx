@@ -1,6 +1,9 @@
-// Phase 1 placeholder — edit items in src/data/homepage.ts → selectedWork.
+// Phase 1 placeholder — edit projects in src/data/projects.ts.
+// Cards shown here = projects with featured: true.
 
-import { selectedWork } from '@/data/homepage'
+import { projects } from '@/data/projects'
+
+const featured = projects.filter((p) => p.featured)
 
 export function SelectedWork() {
   return (
@@ -13,15 +16,22 @@ export function SelectedWork() {
       </h2>
 
       <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
-        {selectedWork.map((item) => (
+        {featured.map((item) => (
           <div
             key={item.id}
-            className="flex aspect-[4/3] flex-col items-center justify-center bg-background"
+            className="flex aspect-[4/3] flex-col bg-background"
           >
-            <div className="flex h-full w-full flex-col items-center justify-center border border-dashed border-border m-px gap-1">
-              <span className="text-label text-foreground">{item.title}</span>
-              <span className="text-label text-muted">{item.category}</span>
-              <span className="text-label text-muted/40">{item.year}</span>
+            <div className="flex h-full w-full flex-col justify-between border border-dashed border-border m-px p-6">
+              <div className="flex flex-col gap-1">
+                <span className="text-label text-foreground">{item.title}</span>
+                <span className="text-label text-muted">{item.category} · {item.year}</span>
+              </div>
+              <p className="text-label text-muted/60">{item.description}</p>
+              <div className="flex gap-2 flex-wrap">
+                {item.tags.map((tag) => (
+                  <span key={tag} className="text-label text-muted/40">{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
         ))}

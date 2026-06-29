@@ -58,19 +58,11 @@ export interface Skill {
 
 /* ─── Homepage sections ─────────────────────────────────────────────────────── */
 
-export interface WorkItem {
-  id: string
-  title: string
-  category: string
-  year: number
-  href?: string
-}
-
 export interface UpdateEntry {
   id: string
   date: string   // display string, e.g. "06 / 26"
   title: string
-  tag: string
+  tag: string    // category: "Building" | "Learning" | "Research" | "Recently Finished"
 }
 
 export interface ContactData {
@@ -84,6 +76,31 @@ export interface HeroPanel {
   id: string
   label: string
   title: string
+  description: string
+  cta: { label: string; href: string }
+}
+
+/* ─── About ──────────────────────────────────────────────────────────────────── */
+
+export interface Language {
+  name: string
+  level: string  // e.g. "Native" | "Fluent" | "Conversational"
+}
+
+export interface Experience {
+  id: string
+  role: string
+  org: string
+  period: string       // e.g. "2023 – Present"
+  description: string
+}
+
+export interface AboutData {
+  bio: string[]        // array of paragraphs
+  location: string
+  resumeHref: string   // path to PDF in /public, e.g. "/resume.pdf"
+  languages: Language[]
+  experience: Experience[]
 }
 
 /* ─── Journey ───────────────────────────────────────────────────────────────── */

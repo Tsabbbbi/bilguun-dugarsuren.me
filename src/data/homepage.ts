@@ -2,85 +2,92 @@
  * Homepage sample content — Phase 1 placeholder data.
  *
  * Edit everything in this file freely.
- * Components import from here; nothing is hardcoded inside the JSX.
+ * Components import from here; nothing is hardcoded inside JSX.
+ *
+ * Selected Work cards → edit src/data/projects.ts (set featured: true)
  */
 
-import type { WorkItem, UpdateEntry, ContactData, HeroPanel } from '@/types'
+import type { UpdateEntry, ContactData, HeroPanel } from '@/types'
 
-// ── Selected Work ─────────────────────────────────────────────────────────────
-// Add / remove / reorder items here. Each appears as one card in the grid.
+// ── Hero Editorial Panels ─────────────────────────────────────────────────────
+// Each panel = one stop in the horizontal slideshow.
+// Edit labels, titles, descriptions, and CTAs here.
+// Add/remove panels — Hero.tsx reads PANEL_COUNT from this array automatically.
 
-export const selectedWork: WorkItem[] = [
+export const heroPanels: HeroPanel[] = [
   {
-    id: 'project-a',
-    title: 'Project A',
-    category: 'Design',
-    year: 2025,
-    href: undefined,
+    id:          'work',
+    label:       'WORK',
+    title:       'Selected Work',
+    description: 'Programming, design, AI research, and photography.',
+    cta:         { label: 'View all work', href: '/work' },
   },
   {
-    id: 'project-b',
-    title: 'Project B',
-    category: 'Programming',
-    year: 2024,
-    href: undefined,
+    id:          'journey',
+    label:       'JOURNEY',
+    title:       'Journey',
+    description: 'Learning, certifications, and milestones along the way.',
+    cta:         { label: 'See the journey', href: '/journey' },
   },
   {
-    id: 'project-c',
-    title: 'Project C',
-    category: 'AI Research',
-    year: 2024,
-    href: undefined,
+    id:          'billy',
+    label:       'BILLY',
+    title:       'Billy',
+    description: 'An AI persona, a terminal, or something in between.',
+    cta:         { label: 'Meet Billy', href: '/billy' },
+  },
+  {
+    id:          'about',
+    label:       'ABOUT',
+    title:       'About',
+    description: 'Background, skills, languages, and experience.',
+    cta:         { label: 'About me', href: '/about' },
+  },
+  {
+    id:          'contact',
+    label:       'CONTACT',
+    title:       'Contact',
+    description: 'Open to freelance, collaboration, and interesting problems.',
+    cta:         { label: 'Get in touch', href: '/contact' },
   },
 ]
 
 // ── Latest Updates ────────────────────────────────────────────────────────────
-// Rows in reverse-chronological order. date is a display string, not ISO.
+// tag values: "Building" | "Learning" | "Research" | "Recently Finished"
+// Sorted newest first by convention.
 
 export const latestUpdates: UpdateEntry[] = [
   {
-    id: 'update-1',
-    date: '06 / 26',
-    title: 'Started building the new portfolio',
-    tag: 'Dev',
+    id:    'update-1',
+    date:  '06 / 26',
+    title: 'Building the new portfolio — intro animation shipped',
+    tag:   'Building',
   },
   {
-    id: 'update-2',
-    date: '06 / 15',
-    title: 'Completed intro animation prototype',
-    tag: 'Design',
+    id:    'update-2',
+    date:  '06 / 15',
+    title: 'Researching editorial layout and typographic systems',
+    tag:   'Research',
   },
   {
-    id: 'update-3',
-    date: '05 / 30',
-    title: 'Explored editorial layout references',
-    tag: 'Research',
+    id:    'update-3',
+    date:  '05 / 30',
+    title: 'Finished Next.js App Router deep-dive',
+    tag:   'Recently Finished',
   },
   {
-    id: 'update-4',
-    date: '05 / 12',
-    title: 'Initial concept — dark editorial direction',
-    tag: 'Concept',
+    id:    'update-4',
+    date:  '05 / 12',
+    title: 'Learning Framer Motion — advanced animation patterns',
+    tag:   'Learning',
   },
 ]
 
-// ── Contact ───────────────────────────────────────────────────────────────────
+// ── Contact Preview (homepage strip) ─────────────────────────────────────────
 
 export const contactData: ContactData = {
   headline: "Let's work together",
-  subline: 'Open to freelance, collaboration, and interesting problems.',
+  subline:  'Open to freelance, collaboration, and interesting problems.',
   ctaLabel: 'Get in touch',
-  ctaHref: 'mailto:hello@example.com',  // ← replace with your email
+  ctaHref:  '/contact',
 }
-
-// ── Hero Editorial Panels ─────────────────────────────────────────────────────
-// Each panel = one stop in the horizontal slideshow.
-// Keep the array length in sync if you add / remove panels (Hero.tsx reads it).
-
-export const heroPanels: HeroPanel[] = [
-  { id: 'work',    label: 'WORK',    title: 'Selected Work' },
-  { id: 'journey', label: 'JOURNEY', title: 'Journey' },
-  { id: 'billy',   label: 'BILLY',   title: 'Billy' },
-  { id: 'about',   label: 'ABOUT',   title: 'About' },
-  { id: 'contact', label: 'CONTACT', title: 'Contact' },
-]

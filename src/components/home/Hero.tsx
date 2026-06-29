@@ -132,6 +132,13 @@ function DesktopPanel({
       <div className="mt-6 flex h-10 w-28 items-center justify-center border border-dashed border-border">
         <span className="text-label text-muted/30">animation</span>
       </div>
+      <p className="mt-6 text-label text-muted text-center max-w-xs">{panel.description}</p>
+      <a
+        href={panel.cta.href}
+        className="mt-4 text-label text-muted/60 hover:text-foreground underline underline-offset-4 transition-colors"
+      >
+        {panel.cta.label}
+      </a>
     </div>
   )
 }
@@ -210,6 +217,13 @@ function MobilePanel({
         <span className="text-h3 text-muted">{panel.title}</span>
         <span className="text-label text-muted/40 mt-1">artwork</span>
       </div>
+      <p className="mt-4 text-label text-muted text-center max-w-[260px]">{panel.description}</p>
+      <a
+        href={panel.cta.href}
+        className="mt-3 text-label text-muted/60 hover:text-foreground underline underline-offset-4 transition-colors"
+      >
+        {panel.cta.label}
+      </a>
     </div>
   )
 }
