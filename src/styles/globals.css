@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESIGN TOKENS — Tailwind @theme
+   Only values that need to generate Tailwind utility classes live here.
+   Arbitrary CSS-only values (spacing-site-x, nav-height) live in :root below.
+───────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Colors — generate bg-*, text-*, border-* utilities */
+  --color-background: #000000;  /* Page background      */
+  --color-foreground: #ffffff;  /* Primary text         */
+  --color-muted:      #737373;  /* Secondary text       */
+  --color-accent:     #e31b23;  /* Accent red           */
+  --color-border:     #1f1f1f;  /* Border color         */
+
+  /* Font family
+     Font: Space Grotesk — geometric, wide letterforms, Swiss editorial quality.
+     To swap: change the CSS variable name here and in app/layout.tsx.
+     Candidates: Neue Haas Grotesk, Aktiv Grotesk, ABC Diatype. */
+  --font-sans: var(--font-space-grotesk);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SITE TOKENS — :root
+   CSS custom properties used as arbitrary values, not Tailwind utilities.
+───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Nav height — used for layout offset calculations */
+  --nav-height: 3.5rem;
+
+  /* Horizontal site gutter — used as px-[var(--spacing-site-x)] */
+  --spacing-site-x: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  :root { --spacing-site-x: 3rem; }
+}
+
+@media (min-width: 1280px) {
+  :root { --spacing-site-x: 5rem; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE STYLES
+───────────────────────────────────────────────────────────────────────────── */
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scroll only for users who haven't requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100dvh;
+}
+
+/* Text selection */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-foreground);
+}
+
+/* Focus — Tailwind preflight handles *:focus reset.
+   Only add the visible ring here; do not suppress focus globally. */
+*:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TYPOGRAPHY HIERARCHY
+   Registered as Tailwind component classes so they participate in the
+   cascade correctly alongside utility classes.
+───────────────────────────────────────────────────────────────────────────── */
+
+@layer components {
+  /* Display — hero, large statements */
+  .text-display {
+    font-size: clamp(3.5rem, 9vw, 9.5rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  /* Heading 1 — page titles */
+  .text-h1 {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  /* Heading 2 — section titles */
+  .text-h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  /* Heading 3 — subsection titles */
+  .text-h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  /* Body — prose */
+  .text-body {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  /* Label — metadata, categories, UI labels */
+  .text-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+}
