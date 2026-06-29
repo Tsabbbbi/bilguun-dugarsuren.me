@@ -56,6 +56,36 @@ export interface Skill {
   category: SkillCategory
 }
 
+/* ─── Homepage sections ─────────────────────────────────────────────────────── */
+
+export interface WorkItem {
+  id: string
+  title: string
+  category: string
+  year: number
+  href?: string
+}
+
+export interface UpdateEntry {
+  id: string
+  date: string   // display string, e.g. "06 / 26"
+  title: string
+  tag: string
+}
+
+export interface ContactData {
+  headline: string
+  subline: string
+  ctaLabel: string
+  ctaHref: string
+}
+
+export interface HeroPanel {
+  id: string
+  label: string
+  title: string
+}
+
 /* ─── Journey ───────────────────────────────────────────────────────────────── */
 
 export type JourneyType =
