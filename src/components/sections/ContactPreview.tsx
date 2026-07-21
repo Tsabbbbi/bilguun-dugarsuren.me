@@ -11,24 +11,28 @@ export function ContactPreview() {
       aria-labelledby="contact-preview-heading"
     >
       <Reveal>
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
-          <div>
+        <div className="flex flex-col gap-14 lg:flex-row lg:items-end lg:justify-between">
+
+          <div className="flex flex-col gap-6">
+            {/* Headline — section-hero weight, this is the climax of the homepage */}
             <h2
               id="contact-preview-heading"
-              className="text-label text-muted mb-6"
+              className="text-section-hero text-foreground max-w-[18ch]"
             >
-              CONTACT
+              {contactData.headline}
             </h2>
-            <div className="flex flex-col gap-2">
-              <p className="text-h3 text-foreground">{contactData.headline}</p>
-              <p className="text-body text-muted">{contactData.subline}</p>
-            </div>
+            <p className="text-body text-muted/65 max-w-[38ch] leading-relaxed">
+              {contactData.subline}
+            </p>
           </div>
 
           <Magnetic strength={0.3}>
             <a
               href={contactData.ctaHref}
-              className="flex h-12 w-48 items-center justify-center border border-border text-label text-muted hover:text-foreground hover:border-accent transition-colors"
+              className="flex h-12 w-48 shrink-0 items-center justify-center rounded-full border border-[#E6E8E2]/25 text-label text-[#E6E8E2]/70 hover:bg-[#E6E8E2] hover:text-[#0B1E1E] hover:border-[#E6E8E2]"
+              style={{
+                transition: 'background-color 240ms cubic-bezier(0.23,1,0.32,1), color 200ms ease, border-color 200ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1)',
+              }}
             >
               {contactData.ctaLabel}
             </a>

@@ -14,9 +14,9 @@ export function Footer() {
       <div className="overflow-hidden border-b border-border py-4" aria-hidden="true">
         <div className="marquee-track flex w-max items-center gap-10 whitespace-nowrap">
           {marqueeItems.map((item, i) => (
-            <span key={i} className="flex items-center gap-10 text-label text-muted/50">
+            <span key={i} className="flex items-center gap-10 text-label text-muted/40">
               {item}
-              <span className="text-accent">/</span>
+              <span className="text-accent/60">/</span>
             </span>
           ))}
         </div>
@@ -24,10 +24,11 @@ export function Footer() {
 
       <div className="flex flex-col gap-6 px-[var(--spacing-site-x)] py-8 md:flex-row md:items-center md:justify-between">
 
-        {/* Copyright */}
-        <p className="text-label text-muted">
-          © {year} {profile.name}
-        </p>
+        {/* Name + copyright */}
+        <div className="flex flex-col gap-0.5">
+          <p className="text-label text-foreground/70">{profile.name}</p>
+          <p className="text-label text-muted/35">© {year}</p>
+        </div>
 
         {/* Page links */}
         <nav aria-label="Footer navigation">
@@ -36,7 +37,8 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-label text-muted hover:text-foreground transition-colors"
+                  className="text-label text-muted/55 hover:text-foreground"
+                  style={{ transition: 'color 200ms cubic-bezier(0.23,1,0.32,1)' }}
                 >
                   {item.label}
                 </Link>
@@ -45,7 +47,7 @@ export function Footer() {
           </ul>
         </nav>
 
-        {/* Social links — only rendered when values are present */}
+        {/* Social links */}
         {(profile.socials.github || profile.socials.linkedin) && (
           <nav aria-label="Social links">
             <ul className="flex items-center gap-6 list-none" role="list">
@@ -55,7 +57,8 @@ export function Footer() {
                     href={profile.socials.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-label text-muted hover:text-foreground transition-colors"
+                    className="text-label text-muted/55 hover:text-foreground"
+                    style={{ transition: 'color 200ms cubic-bezier(0.23,1,0.32,1)' }}
                   >
                     GitHub
                   </a>
@@ -67,7 +70,8 @@ export function Footer() {
                     href={profile.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-label text-muted hover:text-foreground transition-colors"
+                    className="text-label text-muted/55 hover:text-foreground"
+                    style={{ transition: 'color 200ms cubic-bezier(0.23,1,0.32,1)' }}
                   >
                     LinkedIn
                   </a>

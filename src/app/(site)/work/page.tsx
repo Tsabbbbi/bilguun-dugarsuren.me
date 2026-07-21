@@ -1,24 +1,31 @@
 // Edit projects in src/data/projects.ts.
 
 import type { Metadata } from 'next'
-import { PageContainer } from '@/components/layout/PageContainer'
-import { Section } from '@/components/layout/Section'
+import { DiagonalScroll } from '@/components/system/DiagonalScroll'
 import { Reveal } from '@/components/system/Reveal'
 import { WorkList } from '@/components/work/WorkList'
+import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = { title: 'Work' }
 
+const X  = 'px-[var(--spacing-site-x)]'
+const PT = 'pt-28'
+
 export default function WorkPage() {
   return (
-    <PageContainer>
-      <Section size="lg" aria-label="Work">
-        <Reveal>
-          <p className="text-label text-muted mb-2">WORK</p>
-          <p className="text-h2 text-foreground mb-12">Projects</p>
-        </Reveal>
+    <DiagonalScroll>
 
-        <WorkList />
-      </Section>
-    </PageContainer>
+      {/* ── Panel 0: Projects list ────────────────────────────────────────── */}
+      <div className={`w-full min-h-full bg-background ${X} ${PT} pb-0 flex flex-col justify-between`}>
+        <div className="pb-16">
+          <Reveal>
+            <p className="text-h1 text-foreground mb-12">Projects</p>
+          </Reveal>
+          <WorkList />
+        </div>
+        <Footer />
+      </div>
+
+    </DiagonalScroll>
   )
 }

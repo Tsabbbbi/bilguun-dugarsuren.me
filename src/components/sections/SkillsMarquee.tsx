@@ -18,16 +18,16 @@ interface Tool {
 
 const ROW_1: Tool[] = [
   { icon: SiReact,            name: 'React',          color: '#61DAFB' },
-  { icon: SiNextdotjs,        name: 'Next.js',        color: '#DAF1DE' },
+  { icon: SiNextdotjs,        name: 'Next.js',        color: '#E6E8E2' },
   { icon: SiTypescript,       name: 'TypeScript',     color: '#3178C6' },
   { icon: SiPython,           name: 'Python',         color: '#3776AB' },
   { icon: SiSupabase,         name: 'Supabase',       color: '#3ECF8E' },
   { icon: SiTailwindcss,      name: 'Tailwind CSS',   color: '#06B6D4' },
-  { icon: SiFramer,           name: 'Framer Motion',  color: '#DAF1DE' },
+  { icon: SiFramer,           name: 'Framer Motion',  color: '#E6E8E2' },
   { icon: SiPostgresql,       name: 'PostgreSQL',     color: '#4169E1' },
   { icon: SiNodedotjs,        name: 'Node.js',        color: '#339933' },
   { icon: SiFigma,            name: 'Figma',          color: '#F24E1E' },
-  { icon: SiVercel,           name: 'Vercel',         color: '#DAF1DE' },
+  { icon: SiVercel,           name: 'Vercel',         color: '#E6E8E2' },
   { icon: SiGit,              name: 'Git',            color: '#F05032' },
 ]
 
@@ -37,9 +37,9 @@ const ROW_2: Tool[] = [
   { icon: SiMongodb,          name: 'MongoDB',        color: '#47A248' },
   { icon: SiCloudflare,       name: 'Cloudflare',     color: '#F48120' },
   { icon: SiJupyter,          name: 'Jupyter',        color: '#F37626' },
-  { icon: SiLinux,            name: 'Linux',          color: '#DAF1DE' },
-  { icon: SiGithub,           name: 'GitHub',         color: '#DAF1DE' },
-  { icon: SiThreedotjs,       name: 'Three.js',       color: '#DAF1DE' },
+  { icon: SiLinux,            name: 'Linux',          color: '#E6E8E2' },
+  { icon: SiGithub,           name: 'GitHub',         color: '#E6E8E2' },
+  { icon: SiThreedotjs,       name: 'Three.js',       color: '#E6E8E2' },
   { icon: SiOpenid,           name: 'OpenAI',         color: '#8EB69B' },
   { icon: SiFlutter,          name: 'Flutter',        color: '#02569B' },
 ]
@@ -47,9 +47,9 @@ const ROW_2: Tool[] = [
 function Pill({ tool }: { tool: Tool }) {
   const Icon = tool.icon
   return (
-    <span className="inline-flex items-center gap-2.5 whitespace-nowrap border border-border bg-surface px-4 py-2 rounded-full">
+    <span className="inline-flex items-center gap-2.5 whitespace-nowrap border border-[#E6E8E2]/20 bg-[#E6E8E2]/08 px-4 py-2 rounded-full" style={{ background: 'rgba(230,232,226,0.08)' }}>
       <Icon size={14} style={{ color: tool.color, flexShrink: 0 }} aria-hidden="true" />
-      <span className="text-label text-foreground/75">{tool.name}</span>
+      <span className="text-label text-[#E6E8E2]/75">{tool.name}</span>
     </span>
   )
 }
@@ -73,8 +73,9 @@ export function SkillsMarquee() {
       className="border-t border-border py-14 overflow-hidden"
       aria-label="Technologies and tools"
     >
-      <div className="px-[var(--spacing-site-x)] mb-8">
-        <p className="text-label text-muted">TECHNOLOGIES &amp; TOOLS</p>
+      <div className="px-[var(--spacing-site-x)] mb-10 flex items-baseline justify-between gap-6">
+        <p className="text-h2 text-foreground">Stack</p>
+        <p className="text-label text-muted/40 shrink-0">Tools &amp; technologies</p>
       </div>
 
       <Row items={ROW_1} />

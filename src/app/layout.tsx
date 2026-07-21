@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
-import { Cursor } from '@/components/system/Cursor'
 import { Grain } from '@/components/system/Grain'
+import { Nav } from '@/components/layout/Nav'
 import { profile } from '@/data/profile'
 import '@/styles/globals.css'
 
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <Grain />
-        <Cursor />
+        <Nav />
         {children}
       </body>
     </html>

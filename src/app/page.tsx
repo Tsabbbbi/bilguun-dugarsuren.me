@@ -5,8 +5,8 @@ import { SelectedWork } from '@/components/sections/SelectedWork'
 import { SkillsMarquee } from '@/components/sections/SkillsMarquee'
 import { AboutTeaser } from '@/components/sections/AboutTeaser'
 import { ContactPreview } from '@/components/sections/ContactPreview'
-import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
+import { DiagonalScroll } from '@/components/system/DiagonalScroll'
 import { profile } from '@/data/profile'
 
 export const metadata: Metadata = {
@@ -15,25 +15,38 @@ export const metadata: Metadata = {
 }
 
 /**
- * Homepage lives outside (site)/ intentionally — full layout control,
- * so the nav can float transparent over the hero art instead of sitting
- * on a solid bar like the rest of the site.
+ * Homepage — four full-screen diagonal-scroll panels.
+ * Nav is rendered in app/layout.tsx (fixed, always above).
+ * IntroAnimation overlays everything at z-100 until dismissed.
  */
 export default function HomePage() {
   return (
     <IntroAnimation>
-      <div className="bg-background">
-        <Nav transparent />
+      <DiagonalScroll>
 
-        <Hero />
+        {/* ── Panel 0: Hero ───────────────────────────────────────────────── */}
+        <div className="relative w-full h-full bg-background">
+          <Hero />
+        </div>
 
-        <SelectedWork />
-        <SkillsMarquee />
-        <AboutTeaser />
-        <ContactPreview />
+        {/* ── Panel 1: Selected Work ──────────────────────────────────────── */}
+        <div className="relative w-full h-full bg-background flex flex-col justify-center">
+          <SelectedWork />
+        </div>
 
-        <Footer />
-      </div>
+        {/* ── Panel 2: Skills + About ─────────────────────────────────────── */}
+        <div className="relative w-full h-full bg-background flex flex-col justify-center">
+          <SkillsMarquee />
+          <AboutTeaser />
+        </div>
+
+        {/* ── Panel 3: Contact + Footer ───────────────────────────────────── */}
+        <div className="relative w-full h-full bg-background flex flex-col justify-between">
+          <ContactPreview />
+          <Footer />
+        </div>
+
+      </DiagonalScroll>
     </IntroAnimation>
   )
 }

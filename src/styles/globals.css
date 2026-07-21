@@ -7,15 +7,19 @@
 ───────────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* Colors — generate bg-*, text-*, border-* utilities */
-  --color-background: #051F20;  /* Page background — deep forest   */
-  --color-foreground: #DAF1DE;  /* Primary text — pale mint        */
-  --color-muted:      #8EB69B;  /* Secondary text — sage green     */
-  --color-accent:     #8EB69B;  /* Accent — sage green             */
-  --color-border:     #163832;  /* Border — mid forest             */
-  --color-surface:    #0B2B26;  /* Card / surface — dark forest    */
-  --color-subtle:     #235347;  /* Hover fill — medium forest      */
-  --color-terminal:   #8EB69B;  /* Billy page accent — sage green  */
+  /* Colors — generate bg-*, text-*, border-* utilities
+     Palette: deep emerald marble with gold veins
+     #0B1E1E · #2C5B37 · #C09B53 · #3A9179 · #6CC2B1 · #E6E8E2  */
+  --color-background: #0B1E1E;  /* Page background — black teal    */
+  --color-foreground: #E6E8E2;  /* Primary text — warm cream       */
+  --color-muted:      #6CC2B1;  /* Secondary text — mint teal      */
+  --color-accent:     #C09B53;  /* Accent — warm gold              */
+  --color-border:     #1E3A2D;  /* Border — dark forest            */
+  --color-surface:    #162B23;  /* Card / surface — deep forest    */
+  --color-subtle:     #2C5B37;  /* Hover fill — forest green       */
+  --color-terminal:   #6CC2B1;  /* Billy page accent — mint teal   */
+  /* Extra token — medium teal-green for secondary interactive */
+  --color-teal:       #3A9179;
 
   /* Font families
      Sans: Space Grotesk — geometric, wide letterforms, Swiss editorial quality.
@@ -35,6 +39,14 @@
 
   /* Horizontal site gutter — used as px-[var(--spacing-site-x)] */
   --spacing-site-x: 1.5rem;
+
+  /* ── Shared easing tokens ───────────────────────────────────────────────
+     Use these everywhere instead of loose cubic-bezier literals.
+     --ease-out-expo : fast start, settles smoothly — default for UI enters
+     --ease-in-out-q : symmetric acceleration — for elements already visible
+  ──────────────────────────────────────────────────────────────────────── */
+  --ease-out-expo:   cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-q:   cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @media (min-width: 768px) {
@@ -67,19 +79,17 @@ body {
   line-height: 1.6;
   min-height: 100dvh;
   position: relative;
+  /* Ambient depth — gold top glow + forest green mid-layer */
+  background-image:
+    radial-gradient(ellipse 70% 35% at 50% 0%, rgba(192,155,83,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 30% at 15% 55%, rgba(44,91,55,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 25% at 82% 78%, rgba(58,145,121,0.05) 0%, transparent 60%);
 }
 
-/* Hide the native cursor only where the custom cursor takes over
-   (fine pointer + no reduced motion). Set on <html> by <Cursor>. */
-html.has-custom-cursor,
-html.has-custom-cursor * {
-  cursor: none !important;
-}
-
-/* Text selection */
+/* Text selection — gold accent */
 ::selection {
-  background-color: var(--color-subtle);
-  color: var(--color-foreground);
+  background-color: #C09B53;
+  color: #0B1E1E;
 }
 
 /* Focus — Tailwind preflight handles *:focus reset.
@@ -144,6 +154,23 @@ html.has-custom-cursor * {
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  /* Overline — sparse-use section identifier. One per page max, intentional only. */
+  .text-overline {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Section hero — for CTA-weight headings that aren't page titles */
+  .text-section-hero {
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
 
   /* Mono — numerals, terminal, code-flavored accents */
