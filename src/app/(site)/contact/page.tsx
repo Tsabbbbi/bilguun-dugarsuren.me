@@ -47,7 +47,7 @@ export default function ContactPage() {
                 <Magnetic strength={0.25}>
                   <a
                     href={`mailto:${profile.email}`}
-                    className="mt-4 flex h-12 w-48 items-center justify-center border border-border rounded-full text-label text-muted hover:text-foreground hover:border-accent/60"
+                    className="mt-4 flex h-12 w-48 items-center justify-center border border-[#DCC9A3]/25 rounded-full text-label text-muted hover:text-foreground hover:border-accent/60"
                     style={{ transition: 'color 200ms cubic-bezier(0.23,1,0.32,1), border-color 200ms cubic-bezier(0.23,1,0.32,1)' }}
                   >
                     {contactData.ctaLabel}

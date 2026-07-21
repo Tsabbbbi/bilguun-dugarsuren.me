@@ -85,11 +85,11 @@ export function Hero() {
           <SpecularButton
             size="md"
             radius={4}
-            tint="#C09B53"
+            tint="#DCC9A3"
             tintOpacity={0.08}
-            textColor="#E6E8E2"
-            lineColor="#E6E8E2"
-            baseColor="#2C5B37"
+            textColor="#EDE5D0"
+            lineColor="#EDE5D0"
+            baseColor="#6B7F4E"
             intensity={1.6}
             shineSize={14}
             shineFade={36}
@@ -104,11 +104,11 @@ export function Hero() {
           <SpecularButton
             size="md"
             radius={4}
-            tint="#3A9179"
+            tint="#4C6A73"
             tintOpacity={0.12}
-            textColor="#C09B53"
-            lineColor="#C09B53"
-            baseColor="#0B1E1E"
+            textColor="#DCC9A3"
+            lineColor="#DCC9A3"
+            baseColor="#1F3D2E"
             intensity={1.2}
             shineSize={10}
             shineFade={40}
@@ -149,7 +149,7 @@ export function Hero() {
       {/* Spring matches the diagonal scroll's physical language; 1.0s ease was a different feel */}
       <motion.div
         className="relative lg:w-[42%] h-[55vh] lg:h-auto flex items-center justify-center border-t border-border lg:border-t-0 lg:border-l overflow-hidden"
-        style={{ background: 'rgba(11,30,30,0.45)' }}
+        style={{ background: 'rgba(31,61,46,0.45)' }}
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 22, mass: 0.8, delay: 0.18 }}

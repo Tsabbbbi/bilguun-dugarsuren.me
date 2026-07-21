@@ -29,7 +29,7 @@ export function ContactPreview() {
           <Magnetic strength={0.3}>
             <a
               href={contactData.ctaHref}
-              className="flex h-12 w-48 shrink-0 items-center justify-center rounded-full border border-[#E6E8E2]/25 text-label text-[#E6E8E2]/70 hover:bg-[#E6E8E2] hover:text-[#0B1E1E] hover:border-[#E6E8E2]"
+              className="flex h-12 w-48 shrink-0 items-center justify-center rounded-full border border-[#DCC9A3]/25 text-label text-[#EDE5D0]/70 hover:bg-[#DCC9A3] hover:text-[#1F3D2E] hover:border-[#DCC9A3]"
               style={{
                 transition: 'background-color 240ms cubic-bezier(0.23,1,0.32,1), color 200ms ease, border-color 200ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1)',
               }}

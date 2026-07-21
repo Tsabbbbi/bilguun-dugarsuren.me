@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Reveal } from '@/components/system/Reveal'
 import { Magnetic } from '@/components/system/Magnetic'
+import { WindowCard } from '@/components/ui/WindowCard'
 import { profile } from '@/data/profile'
 import { aboutData } from '@/data/about'
 
@@ -11,19 +12,24 @@ export function AboutTeaser() {
       aria-labelledby="about-teaser-heading"
     >
       <Reveal>
-        <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:items-end">
+        <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16 lg:items-start">
 
           <div>
-            {/* Name as the heading — no redundant ABOUT eyebrow */}
             <h2 id="about-teaser-heading" className="text-h1 text-foreground leading-none">
               {profile.name}
             </h2>
           </div>
 
           <div className="flex flex-col gap-6">
-            <p className="text-body text-muted/75 leading-relaxed max-w-xl">
-              {aboutData.bio[0]}
-            </p>
+            <WindowCard title="Bio" subtitle="About me">
+              <p
+                className="text-body leading-relaxed"
+                style={{ color: '#3A3A2A' }}
+              >
+                {aboutData.bio[0]}
+              </p>
+            </WindowCard>
+
             <Magnetic strength={0.2}>
               <Link
                 href="/about"

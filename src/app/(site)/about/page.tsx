@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { DiagonalScroll } from '@/components/system/DiagonalScroll'
 import { Reveal } from '@/components/system/Reveal'
 import { Magnetic } from '@/components/system/Magnetic'
+import { WindowCard } from '@/components/ui/WindowCard'
 import { Footer } from '@/components/layout/Footer'
 import { aboutData } from '@/data/about'
 import { profile } from '@/data/profile'
@@ -34,7 +35,12 @@ const JOURNEY_GROUPS: JourneyType[] = ['accomplishment', 'learning', 'certificat
 function shortDate(d: string) { return d.length >= 7 ? d.slice(0, 7) : d }
 
 const X = 'px-[var(--spacing-site-x)]'
-const PT = 'pt-28'  // clears the floating PillNav
+const PT = 'pt-28'
+
+const PAPER_BODY = '#3A3A2A'
+const PAPER_MUTED = '#5A4A3A'
+const PAPER_ACCENT = '#4C6A73'
+const PAPER_GREEN = '#1F3D2E'
 
 export default function AboutPage() {
   return (
@@ -43,18 +49,25 @@ export default function AboutPage() {
       {/* ── Panel 0: Bio + Stats ────────────────────────────────────────────── */}
       <div className={`w-full min-h-full bg-background ${X} ${PT} pb-16`}>
         <Reveal>
-          {/* Name as the page hero — no reflexive ABOUT eyebrow */}
           <p className="text-h1 text-foreground mb-3">{profile.name}</p>
-          <p className="text-body text-muted/60 mb-14 max-w-lg">{profile.title}</p>
+          <p className="text-body text-muted/65 mb-14 max-w-lg">{profile.title}</p>
         </Reveal>
 
-        <div className="grid gap-16 lg:grid-cols-[2fr_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[2fr_1fr]">
 
-          {/* Bio */}
-          <div className="flex flex-col gap-6">
+          {/* Bio paragraphs — each in a WindowCard */}
+          <div className="flex flex-col gap-4">
             {aboutData.bio.map((para, i) => (
               <Reveal key={i} delay={i * 0.06}>
-                <p className="text-body text-foreground/85 leading-relaxed">{para}</p>
+                <WindowCard
+                  title={i === 0 ? 'Bio' : `Bio — continued`}
+                  subtitle={`Note ${i + 1} of ${aboutData.bio.length}`}
+                  defaultState="open"
+                >
+                  <p className="text-body leading-relaxed" style={{ color: PAPER_BODY }}>
+                    {para}
+                  </p>
+                </WindowCard>
               </Reveal>
             ))}
             {aboutData.resumeHref && (
@@ -62,7 +75,7 @@ export default function AboutPage() {
                 <Magnetic strength={0.2}>
                   <a
                     href={aboutData.resumeHref}
-                    className="inline-block mt-4 text-label text-accent hover:text-foreground underline underline-offset-4"
+                    className="inline-block mt-2 text-label text-accent hover:text-foreground underline underline-offset-4"
                     style={{ transition: 'color 200ms cubic-bezier(0.23,1,0.32,1)' }}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -74,8 +87,8 @@ export default function AboutPage() {
             )}
           </div>
 
-          {/* Sidebar — visual weight variation per item type */}
-          <div className="flex flex-col gap-10 border-l border-border pl-8 lg:pl-10">
+          {/* Sidebar */}
+          <div className="flex flex-col gap-6 border-l border-border pl-8 lg:pl-10">
             <Reveal delay={0.06}>
               <p className="text-overline text-muted/40 mb-2">Location</p>
               <p className="text-body text-foreground">{aboutData.location}</p>
@@ -119,61 +132,69 @@ export default function AboutPage() {
 
       {/* ── Panel 1: Experience + Education + Skills ────────────────────────── */}
       <div className={`w-full min-h-full bg-background ${X} ${PT} pb-16`}>
-        <div className="grid gap-16 lg:grid-cols-[2fr_1fr]">
+        <div className="grid gap-14 lg:grid-cols-[2fr_1fr]">
 
-          {/* Experience */}
+          {/* Experience — each entry in a WindowCard */}
           <div>
             <Reveal>
-              <p className="text-h2 text-foreground mb-10">Experience</p>
+              <p className="text-h2 text-foreground mb-8">Experience</p>
             </Reveal>
-            <div className="flex flex-col gap-px bg-border">
-              {aboutData.experience.map((exp) => (
-                <Reveal key={exp.id}>
-                  <div className="flex flex-col gap-2 bg-background py-7">
-                    <div className="flex flex-wrap items-baseline justify-between gap-4">
-                      <span className="text-body text-foreground font-medium">{exp.role}</span>
-                      <span className="text-label text-mono text-muted/35 tabular-nums shrink-0">{exp.period}</span>
+            <div className="flex flex-col gap-4">
+              {aboutData.experience.map((exp, i) => (
+                <Reveal key={exp.id} delay={i * 0.05}>
+                  <WindowCard
+                    title={exp.role}
+                    subtitle={exp.period}
+                    defaultState="open"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <p className="text-label font-medium" style={{ color: PAPER_ACCENT }}>
+                        {exp.org}
+                      </p>
+                      {exp.description && (
+                        <p className="text-body leading-relaxed" style={{ color: PAPER_BODY }}>
+                          {exp.description}
+                        </p>
+                      )}
+                      {exp.bullets && exp.bullets.length > 0 && (
+                        <ul className="flex flex-col gap-1.5 list-none mt-1">
+                          {exp.bullets.map((b, j) => (
+                            <li key={j} className="text-label flex gap-2" style={{ color: PAPER_MUTED }}>
+                              <span style={{ color: PAPER_ACCENT, opacity: 0.6 }}>—</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
-                    <span className="text-label text-accent">{exp.org}</span>
-                    {exp.description && (
-                      <p className="text-body text-muted/60 mt-2 leading-relaxed">{exp.description}</p>
-                    )}
-                    {exp.bullets && exp.bullets.length > 0 && (
-                      <ul className="mt-2 flex flex-col gap-1.5 list-none">
-                        {exp.bullets.map((b, i) => (
-                          <li key={i} className="text-label text-muted/50 flex gap-2">
-                            <span className="text-accent/50 shrink-0">—</span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                  </WindowCard>
                 </Reveal>
               ))}
             </div>
           </div>
 
           {/* Education + Skills */}
-          <div className="flex flex-col gap-14">
+          <div className="flex flex-col gap-12">
             <div>
               <Reveal>
                 <p className="text-h2 text-foreground mb-6">Education</p>
               </Reveal>
-              <div className="flex flex-col gap-px bg-border">
+              <div className="flex flex-col gap-4">
                 {aboutData.education.map((edu) => (
-                  <div key={edu.id} className="flex flex-col gap-1.5 bg-background py-6">
-                    <span className="text-body text-foreground font-medium">{edu.school}</span>
-                    <span className="text-body text-muted/70">{edu.degree}</span>
-                    <span className="text-label text-mono text-muted/35 tabular-nums">{edu.period}</span>
-                  </div>
+                  <WindowCard key={edu.id} title={edu.school} subtitle={edu.period} defaultState="open">
+                    <div className="flex flex-col gap-1.5">
+                      <p className="text-body font-medium" style={{ color: PAPER_GREEN }}>{edu.school}</p>
+                      <p className="text-body" style={{ color: PAPER_BODY, opacity: 0.75 }}>{edu.degree}</p>
+                      <p className="text-label text-mono tabular-nums" style={{ color: PAPER_MUTED, opacity: 0.7 }}>{edu.period}</p>
+                    </div>
+                  </WindowCard>
                 ))}
               </div>
             </div>
 
             <Reveal delay={0.06}>
               <p className="text-h2 text-foreground mb-6">Skills</p>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-5">
                 {SKILL_CATS.map((cat) => {
                   const catSkills = skills.filter((s) => s.category === cat)
                   if (!catSkills.length) return null
@@ -212,23 +233,24 @@ export default function AboutPage() {
                       {JOURNEY_LABELS[type]}
                     </p>
                   </Reveal>
-                  <div className="flex flex-col gap-px bg-border">
+                  <div className="flex flex-col gap-3">
                     {entries.map((entry, i) => (
                       <Reveal key={entry.id} delay={Math.min(i, 3) * 0.05}>
-                        <div className="flex flex-col gap-1.5 bg-background py-6 sm:flex-row sm:gap-10">
-                          <span className="text-label text-mono text-accent tabular-nums shrink-0 w-20">
-                            {shortDate(entry.date)}
-                          </span>
-                          <div className="flex flex-col gap-1">
-                            <span className="text-body text-foreground font-medium">{entry.title}</span>
+                        <WindowCard
+                          title={entry.title}
+                          subtitle={shortDate(entry.date)}
+                          defaultState="open"
+                        >
+                          <div className="flex flex-col gap-1.5">
+                            <p className="text-body font-medium leading-snug" style={{ color: PAPER_GREEN }}>{entry.title}</p>
                             {entry.institution && (
-                              <span className="text-body text-muted/65">{entry.institution}</span>
+                              <p className="text-body" style={{ color: PAPER_BODY, opacity: 0.7 }}>{entry.institution}</p>
                             )}
                             {entry.body && (
-                              <p className="text-label text-muted/55 mt-1 leading-relaxed">{entry.body}</p>
+                              <p className="text-label leading-relaxed mt-0.5" style={{ color: PAPER_MUTED, opacity: 0.85 }}>{entry.body}</p>
                             )}
                           </div>
-                        </div>
+                        </WindowCard>
                       </Reveal>
                     ))}
                   </div>

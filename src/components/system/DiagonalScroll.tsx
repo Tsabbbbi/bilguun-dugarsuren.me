@@ -134,7 +134,7 @@ function Dots({ n, active, goTo }: DotsProps) {
             width: 4,
             height: i === active ? 22 : 4,
             borderRadius: 9999,
-            background: i === active ? '#C09B53' : 'rgba(142,182,155,0.22)',
+            background: i === active ? '#DCC9A3' : 'rgba(107,127,78,0.22)',
             transition: 'height 0.35s ease, background 0.35s ease',
           }}
         />
@@ -245,7 +245,7 @@ export function DiagonalScroll({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#0B1E1E' }}>
+      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#1F3D2E' }}>
         {sections.map((child, i) => (
           <Panel
             key={i}

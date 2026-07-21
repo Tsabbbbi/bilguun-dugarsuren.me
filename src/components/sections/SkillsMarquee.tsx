@@ -47,9 +47,9 @@ const ROW_2: Tool[] = [
 function Pill({ tool }: { tool: Tool }) {
   const Icon = tool.icon
   return (
-    <span className="inline-flex items-center gap-2.5 whitespace-nowrap border border-[#E6E8E2]/20 bg-[#E6E8E2]/08 px-4 py-2 rounded-full" style={{ background: 'rgba(230,232,226,0.08)' }}>
+    <span className="inline-flex items-center gap-2.5 whitespace-nowrap border border-[#DCC9A3]/20 px-4 py-2 rounded-full" style={{ background: 'rgba(220,201,163,0.07)' }}>
       <Icon size={14} style={{ color: tool.color, flexShrink: 0 }} aria-hidden="true" />
-      <span className="text-label text-[#E6E8E2]/75">{tool.name}</span>
+      <span className="text-label text-[#EDE5D0]/70">{tool.name}</span>
     </span>
   )
 }

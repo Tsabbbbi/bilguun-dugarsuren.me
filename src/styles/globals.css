@@ -8,18 +8,18 @@
 
 @theme {
   /* Colors — generate bg-*, text-*, border-* utilities
-     Palette: deep emerald marble with gold veins
-     #0B1E1E · #2C5B37 · #C09B53 · #3A9179 · #6CC2B1 · #E6E8E2  */
-  --color-background: #0B1E1E;  /* Page background — black teal    */
-  --color-foreground: #E6E8E2;  /* Primary text — warm cream       */
-  --color-muted:      #6CC2B1;  /* Secondary text — mint teal      */
-  --color-accent:     #C09B53;  /* Accent — warm gold              */
-  --color-border:     #1E3A2D;  /* Border — dark forest            */
-  --color-surface:    #162B23;  /* Card / surface — deep forest    */
-  --color-subtle:     #2C5B37;  /* Hover fill — forest green       */
-  --color-terminal:   #6CC2B1;  /* Billy page accent — mint teal   */
-  /* Extra token — medium teal-green for secondary interactive */
-  --color-teal:       #3A9179;
+     Palette: forest / sage / sand — nature grounded, earthy premium
+     #1F3D2E · #6B7F4E · #A2B5A0 · #DCC9A3 · #4C6A73 · #5A4A3A  */
+  --color-background: #1F3D2E;  /* Forest shade — deep green       */
+  --color-foreground: #EDE5D0;  /* Warm light cream — primary text */
+  --color-muted:      #A2B5A0;  /* Sage mist — secondary text      */
+  --color-accent:     #DCC9A3;  /* Sand beige — accent / highlight */
+  --color-border:     #2A4A38;  /* Forest border — dark            */
+  --color-surface:    #253D2E;  /* Surface — slightly lighter bg   */
+  --color-subtle:     #6B7F4E;  /* Moss green — hover fill         */
+  --color-terminal:   #A2B5A0;  /* Billy page accent — sage mist   */
+  /* Extra token — river blue for secondary interactive */
+  --color-teal:       #4C6A73;
 
   /* Font families
      Sans: Space Grotesk — geometric, wide letterforms, Swiss editorial quality.
@@ -79,17 +79,17 @@ body {
   line-height: 1.6;
   min-height: 100dvh;
   position: relative;
-  /* Ambient depth — gold top glow + forest green mid-layer */
+  /* Ambient depth — sand top glow + moss green mid-layer + river blue corner */
   background-image:
-    radial-gradient(ellipse 70% 35% at 50% 0%, rgba(192,155,83,0.05) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 30% at 15% 55%, rgba(44,91,55,0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 25% at 82% 78%, rgba(58,145,121,0.05) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 35% at 50% 0%, rgba(220,201,163,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 30% at 15% 55%, rgba(107,127,78,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 25% at 82% 78%, rgba(76,106,115,0.05) 0%, transparent 60%);
 }
 
-/* Text selection — gold accent */
+/* Text selection — sand beige */
 ::selection {
-  background-color: #C09B53;
-  color: #0B1E1E;
+  background-color: #DCC9A3;
+  color: #1F3D2E;
 }
 
 /* Focus — Tailwind preflight handles *:focus reset.

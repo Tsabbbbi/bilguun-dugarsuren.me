@@ -1,4 +1,4 @@
-/* ── PillNav — Forest Green Design System ─────────────────────────────────── */
+/* ── PillNav — Forest / Sage / Sand Design System ───────────────────────────── */
 
 .pill-nav-container {
   position: fixed;
@@ -47,7 +47,7 @@
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 9999px;
-  background: var(--base, #0B2B26);
+  background: var(--base, #1F3D2E);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -56,14 +56,14 @@
   font-weight: 700;
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
-  color: var(--pill-text, #6CC2B1);
-  border: 1px solid rgba(192, 155, 83, 0.15);
+  color: var(--pill-text, #A2B5A0);
+  border: 1px solid rgba(220, 201, 163, 0.18);
   transition: border-color 0.2s ease;
   flex-shrink: 0;
 }
 
 .pill-logo:hover {
-  border-color: rgba(142, 182, 155, 0.35);
+  border-color: rgba(220, 201, 163, 0.4);
 }
 
 /* ── Nav items bar ────────────────────────────────────────────────────────── */
@@ -73,9 +73,9 @@
   display: flex;
   align-items: center;
   height: var(--nav-h);
-  background: var(--base, #0B2B26);
+  background: var(--base, #1F3D2E);
   border-radius: 9999px;
-  border: 1px solid rgba(192, 155, 83, 0.12);
+  border: 1px solid rgba(220, 201, 163, 0.14);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -103,8 +103,8 @@
   justify-content: center;
   height: 100%;
   padding: 0 var(--pill-pad-x);
-  background: var(--pill-bg, #1E3A2D);
-  color: var(--pill-text, #6CC2B1);
+  background: var(--pill-bg, #2A4A38);
+  color: var(--pill-text, #A2B5A0);
   text-decoration: none;
   border-radius: 9999px;
   box-sizing: border-box;
@@ -123,7 +123,7 @@
 }
 
 .pill:hover {
-  border-color: rgba(142, 182, 155, 0.2);
+  border-color: rgba(107, 127, 78, 0.25);
 }
 
 .pill .hover-circle {
@@ -131,7 +131,7 @@
   left: 50%;
   bottom: 0;
   border-radius: 50%;
-  background: var(--base, #0B2B26);
+  background: var(--base, #1F3D2E);
   z-index: 1;
   display: block;
   pointer-events: none;
@@ -157,7 +157,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--hover-text, #E6E8E2);
+  color: var(--hover-text, #EDE5D0);
   z-index: 3;
   display: inline-block;
   will-change: transform, opacity;
@@ -165,8 +165,8 @@
 
 /* Active indicator — dot below the pill */
 .pill.is-active {
-  border-color: rgba(192, 155, 83, 0.35);
-  background: rgba(192, 155, 83, 0.08);
+  border-color: rgba(220, 201, 163, 0.35);
+  background: rgba(220, 201, 163, 0.08);
 }
 
 .pill.is-active::after {
@@ -177,7 +177,7 @@
   transform: translateX(-50%);
   width: 4px;
   height: 4px;
-  background: #C09B53;
+  background: #DCC9A3;
   border-radius: 50%;
   z-index: 4;
 }
@@ -198,8 +198,8 @@
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, #0B2B26);
-  border: 1px solid rgba(192, 155, 83, 0.15);
+  background: var(--base, #1F3D2E);
+  border: 1px solid rgba(220, 201, 163, 0.18);
   display: none;
   flex-direction: column;
   align-items: center;
@@ -217,7 +217,7 @@
 .hamburger-line {
   width: 16px;
   height: 1.5px;
-  background: #6CC2B1;
+  background: #A2B5A0;
   border-radius: 1px;
   transition: all 0.01s ease;
   transform-origin: center;
@@ -230,12 +230,12 @@
   top: calc(100% + 0.5rem);
   left: 1rem;
   right: 1rem;
-  background: var(--base, #0B2B26);
-  border: 1px solid rgba(192, 155, 83, 0.15);
+  background: var(--base, #1F3D2E);
+  border: 1px solid rgba(220, 201, 163, 0.18);
   border-radius: 20px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 16px 48px rgba(5, 31, 32, 0.5);
+  box-shadow: 0 16px 48px rgba(15, 40, 25, 0.55);
   z-index: 998;
   opacity: 0;
   transform-origin: top center;
@@ -254,8 +254,8 @@
 .mobile-menu-popover .mobile-menu-link {
   display: block;
   padding: 12px 16px;
-  color: #6CC2B1;
-  background-color: #1E3A2D;
+  color: #A2B5A0;
+  background-color: #2A4A38;
   text-decoration: none;
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
@@ -264,12 +264,12 @@
   text-transform: uppercase;
   border-radius: 14px;
   border: 1px solid transparent;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .mobile-menu-popover .mobile-menu-link:hover,
 .mobile-menu-popover .mobile-menu-link.is-active {
-  background-color: rgba(142, 182, 155, 0.08);
-  border-color: rgba(142, 182, 155, 0.25);
-  color: #E6E8E2;
+  background-color: rgba(107, 127, 78, 0.12);
+  border-color: rgba(107, 127, 78, 0.28);
+  color: #EDE5D0;
 }

@@ -33,8 +33,8 @@ export function WorkList() {
                 className={cn(
                   'text-label border rounded-full px-3 py-1 transition-colors',
                   active
-                    ? 'border-[#E6E8E2] bg-[#E6E8E2] text-[#0B1E1E]'
-                    : 'border-border text-muted/60 hover:text-[#E6E8E2] hover:border-[#E6E8E2]/50'
+                    ? 'border-[#DCC9A3] bg-[#DCC9A3] text-[#1F3D2E]'
+                    : 'border-border text-muted/60 hover:text-[#EDE5D0] hover:border-[#DCC9A3]/50'
                 )}
               >
                 {cat.label}
@@ -74,7 +74,7 @@ export function WorkList() {
               </div>
               <div className="flex shrink-0 items-center gap-4 mt-1 sm:mt-0">
                 <span className="text-label text-mono text-muted/35 tabular-nums">{project.year}</span>
-                <span className="text-label text-muted/55 border border-border rounded-full px-2.5 py-0.5">
+                <span className="text-label text-[#DCC9A3]/55 border border-[#DCC9A3]/20 rounded-full px-2.5 py-0.5">
                   {project.category.replace('-', ' ')}
                 </span>
               </div>
