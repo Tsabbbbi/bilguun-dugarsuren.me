@@ -3,12 +3,12 @@ import type { Profile } from '@/types'
 export const profile: Profile = {
   name:     'Bilguun Dugarsuren',
   initials: 'BD',
-  title:    'Creative Technologist',          // ← replace with your title
-  bio:      'Building at the intersection of code, design, and language. Based in Ulaanbaatar.', // ← replace
-  email:    'hello@bilguun-dugarsuren.me',    // ← replace with your email
-  location: 'Ulaanbaatar, Mongolia',          // ← replace
+  title:    'Applied Math & CS Student',
+  bio:      'Building at the intersection of code, AI, and cross-cultural storytelling. Based in Kunshan, China.',
+  email:    'bd194@duke.edu',
+  location: 'Kunshan, Jiangsu Province, China',
   socials: {
-    github:   'https://github.com/Tsabbbbi', // ← replace
-    linkedin: '',                             // ← add your LinkedIn URL
+    github:   'https://github.com/Tsabbbbi',
+    linkedin: '',
   },
 }

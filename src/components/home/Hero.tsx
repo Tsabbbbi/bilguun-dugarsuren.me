@@ -1,15 +1,17 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import {
   motion,
   useScroll,
   useMotionValue,
   useMotionValueEvent,
-  type MotionValue,
 } from 'framer-motion'
-import { PlaceholderFigure } from './PlaceholderFigure'
+import { HeroFigure } from './HeroFigure'
+import { PanelArt } from './PanelArt'
+import { Magnetic } from '@/components/system/Magnetic'
 import { heroPanels } from '@/data/homepage'
+import { cn } from '@/lib/utils'
 
 // Edit panels in src/data/homepage.ts → heroPanels.
 const PANELS = heroPanels
@@ -24,6 +26,7 @@ function DesktopHero() {
   const panelWidthMv = useMotionValue(0)
   const x = useMotionValue(0)
   const isSnapping = useRef(false)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -43,6 +46,7 @@ function DesktopHero() {
   // Drive x from scrollYProgress — reacts to both scroll and resize
   useMotionValueEvent(scrollYProgress, 'change', (progress) => {
     x.set(-progress * (PANEL_COUNT - 1) * panelWidthMv.get())
+    setActiveIndex(Math.round(progress * (PANEL_COUNT - 1)))
   })
   useMotionValueEvent(panelWidthMv, 'change', (width) => {
     x.set(-scrollYProgress.get() * (PANEL_COUNT - 1) * width)
@@ -90,20 +94,20 @@ function DesktopHero() {
       {/* Sticky inner — holds position while user scrolls the outer wrapper */}
       <div className="sticky top-0 flex overflow-hidden" style={{ height: '100dvh' }}>
 
-        {/* Left 35% — illustrated figure */}
+        {/* Left 35% — generative figure */}
         <div className="w-[35%] shrink-0 border-r border-border">
-          <PlaceholderFigure />
+          <HeroFigure />
         </div>
 
         {/* Right 65% — panels translate horizontally as x changes */}
         <div ref={slideshowRef} className="relative w-[65%] overflow-hidden">
           <motion.div style={{ x }} className="flex h-full">
             {PANELS.map((panel, i) => (
-              <DesktopPanel key={panel.id} panel={panel} index={i} />
+              <DesktopPanel key={panel.id} panel={panel} index={i} active={i === activeIndex} />
             ))}
           </motion.div>
 
-          <PanelCounter scrollYProgress={scrollYProgress} sectionRef={sectionRef} />
+          <PanelCounter sectionRef={sectionRef} activeIndex={activeIndex} />
         </div>
 
       </div>
@@ -114,42 +118,49 @@ function DesktopHero() {
 function DesktopPanel({
   panel,
   index,
+  active,
 }: {
   panel: (typeof PANELS)[number]
   index: number
+  active: boolean
 }) {
   return (
     // min-w-full makes each panel exactly as wide as the 65% container
     <div className="relative flex h-full min-w-full shrink-0 flex-col items-center justify-center border-r border-border px-10">
-      <span className="text-label text-muted absolute top-8 left-8">
+      <span className="text-label text-muted absolute top-8 left-8 text-mono">
         {String(index + 1).padStart(2, '0')}&thinsp;/&thinsp;{String(PANEL_COUNT).padStart(2, '0')}
       </span>
       <span className="text-label text-accent mb-6">{panel.label}</span>
-      <div className="flex h-56 w-full max-w-sm flex-col items-center justify-center border border-dashed border-border">
-        <span className="text-h3 text-muted">{panel.title}</span>
-        <span className="text-label text-muted/40 mt-2">artwork</span>
-      </div>
-      <div className="mt-6 flex h-10 w-28 items-center justify-center border border-dashed border-border">
-        <span className="text-label text-muted/30">animation</span>
-      </div>
-      <p className="mt-6 text-label text-muted text-center max-w-xs">{panel.description}</p>
-      <a
-        href={panel.cta.href}
-        className="mt-4 text-label text-muted/60 hover:text-foreground underline underline-offset-4 transition-colors"
+
+      <motion.div
+        animate={{ opacity: active ? 1 : 0.4, y: active ? 0 : 6 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="flex h-56 w-full max-w-sm flex-col items-center justify-center gap-6 border border-border"
       >
-        {panel.cta.label}
-      </a>
+        <span className="text-h3 text-foreground">{panel.title}</span>
+        <PanelArt id={panel.id} />
+      </motion.div>
+
+      <p className="mt-6 text-label text-muted text-center max-w-xs">{panel.description}</p>
+      <Magnetic strength={0.25}>
+        <a
+          href={panel.cta.href}
+          className="mt-4 inline-block text-label text-muted/60 hover:text-foreground underline underline-offset-4 transition-colors"
+        >
+          {panel.cta.label}
+        </a>
+      </Magnetic>
     </div>
   )
 }
 
 // Dot navigation — lets users jump directly to a panel
 function PanelCounter({
-  scrollYProgress,
   sectionRef,
+  activeIndex,
 }: {
-  scrollYProgress: MotionValue<number>
   sectionRef: React.RefObject<HTMLDivElement | null>
+  activeIndex: number
 }) {
   const jumpTo = (panelIndex: number) => {
     const section = sectionRef.current
@@ -164,11 +175,14 @@ function PanelCounter({
   }
 
   return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2" aria-hidden="true">
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
       {PANELS.map((panel, i) => (
         <button
           key={panel.id}
-          className="h-1 w-6 rounded-full bg-border hover:bg-muted transition-colors focus-visible:outline-accent"
+          className={cn(
+            'h-1 w-6 rounded-full transition-colors focus-visible:outline-accent',
+            i === activeIndex ? 'bg-accent' : 'bg-border hover:bg-muted'
+          )}
           onClick={() => jumpTo(i)}
           aria-label={`Jump to ${panel.label}`}
         />
@@ -184,7 +198,7 @@ function MobileHero() {
     <div className="flex h-dvh flex-col">
       {/* Figure — compact top strip */}
       <div className="relative h-[32%] shrink-0 border-b border-border overflow-hidden">
-        <PlaceholderFigure />
+        <HeroFigure />
       </div>
 
       {/* Panels — native horizontal CSS scroll-snap */}
@@ -209,13 +223,13 @@ function MobilePanel({
 }) {
   return (
     <div className="relative flex h-full min-w-full shrink-0 flex-col items-center justify-center border-r border-border px-6 snap-center">
-      <span className="text-label text-muted absolute top-5 left-5">
+      <span className="text-label text-muted absolute top-5 left-5 text-mono">
         {String(index + 1).padStart(2, '0')}&thinsp;/&thinsp;{String(PANEL_COUNT).padStart(2, '0')}
       </span>
       <span className="text-label text-accent mb-4">{panel.label}</span>
-      <div className="flex h-40 w-full max-w-[260px] flex-col items-center justify-center border border-dashed border-border">
-        <span className="text-h3 text-muted">{panel.title}</span>
-        <span className="text-label text-muted/40 mt-1">artwork</span>
+      <div className="flex h-40 w-full max-w-[260px] flex-col items-center justify-center gap-4 border border-border">
+        <span className="text-h3 text-foreground">{panel.title}</span>
+        <PanelArt id={panel.id} />
       </div>
       <p className="mt-4 text-label text-muted text-center max-w-[260px]">{panel.description}</p>
       <a

@@ -13,12 +13,13 @@
   --color-muted:      #737373;  /* Secondary text       */
   --color-accent:     #e31b23;  /* Accent red           */
   --color-border:     #1f1f1f;  /* Border color         */
+  --color-terminal:   #39ff88;  /* Billy page accent — phosphor green */
 
-  /* Font family
-     Font: Space Grotesk — geometric, wide letterforms, Swiss editorial quality.
-     To swap: change the CSS variable name here and in app/layout.tsx.
-     Candidates: Neue Haas Grotesk, Aktiv Grotesk, ABC Diatype. */
+  /* Font families
+     Sans: Space Grotesk — geometric, wide letterforms, Swiss editorial quality.
+     Mono: JetBrains Mono — used for labels, numerals, and the Billy terminal. */
   --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -55,7 +56,7 @@ html {
 
 /* Smooth scroll only for users who haven't requested reduced motion */
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html[data-scroll-behavior='smooth'] { scroll-behavior: smooth; }
 }
 
 body {
@@ -63,6 +64,14 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   min-height: 100dvh;
+  position: relative;
+}
+
+/* Hide the native cursor only where the custom cursor takes over
+   (fine pointer + no reduced motion). Set on <html> by <Cursor>. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
 }
 
 /* Text selection */
@@ -126,11 +135,66 @@ body {
     line-height: 1.7;
   }
 
-  /* Label — metadata, categories, UI labels */
+  /* Label — metadata, categories, UI labels. Set in mono for a "coded" feel. */
   .text-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 0.6875rem;
     font-weight: 500;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  /* Mono — numerals, terminal, code-flavored accents */
+  .text-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   MOTION SYSTEM
+   Keyframes shared across components. Everything here is opt-in via class
+   name, and every animated component checks prefers-reduced-motion itself.
+───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10%      { transform: translate(-1%, -2%); }
+  20%      { transform: translate(-3%, 1%); }
+  30%      { transform: translate(2%, -3%); }
+  40%      { transform: translate(-2%, 3%); }
+  50%      { transform: translate(3%, 1%); }
+  60%      { transform: translate(-1%, 2%); }
+  70%      { transform: translate(1%, -1%); }
+  80%      { transform: translate(-3%, -2%); }
+  90%      { transform: translate(2%, 2%); }
+}
+
+.grain-layer {
+  animation: grain-shift 1.4s steps(8) infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes caret-blink {
+  0%, 45%  { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}
+
+.caret-blink {
+  animation: caret-blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain-layer,
+  .marquee-track,
+  .caret-blink {
+    animation: none !important;
   }
 }

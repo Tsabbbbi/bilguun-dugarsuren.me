@@ -1,5 +1,5 @@
 /**
- * Homepage sample content — Phase 1 placeholder data.
+ * Homepage content.
  *
  * Edit everything in this file freely.
  * Components import from here; nothing is hardcoded inside JSX.
@@ -11,7 +11,6 @@ import type { UpdateEntry, ContactData, HeroPanel } from '@/types'
 
 // ── Hero Editorial Panels ─────────────────────────────────────────────────────
 // Each panel = one stop in the horizontal slideshow.
-// Edit labels, titles, descriptions, and CTAs here.
 // Add/remove panels — Hero.tsx reads PANEL_COUNT from this array automatically.
 
 export const heroPanels: HeroPanel[] = [
@@ -19,21 +18,21 @@ export const heroPanels: HeroPanel[] = [
     id:          'work',
     label:       'WORK',
     title:       'Selected Work',
-    description: 'Programming, design, AI research, and photography.',
+    description: 'Programming, AI research, and computational design.',
     cta:         { label: 'View all work', href: '/work' },
   },
   {
     id:          'journey',
     label:       'JOURNEY',
     title:       'Journey',
-    description: 'Learning, certifications, and milestones along the way.',
+    description: 'Learning, awards, and milestones along the way.',
     cta:         { label: 'See the journey', href: '/journey' },
   },
   {
     id:          'billy',
     label:       'BILLY',
     title:       'Billy',
-    description: 'An AI persona, a terminal, or something in between.',
+    description: 'A terminal, not a chatbot. Try a few commands.',
     cta:         { label: 'Meet Billy', href: '/billy' },
   },
   {
@@ -47,7 +46,7 @@ export const heroPanels: HeroPanel[] = [
     id:          'contact',
     label:       'CONTACT',
     title:       'Contact',
-    description: 'Open to freelance, collaboration, and interesting problems.',
+    description: 'Open to research, freelance, and interesting problems.',
     cta:         { label: 'Get in touch', href: '/contact' },
   },
 ]
@@ -59,27 +58,27 @@ export const heroPanels: HeroPanel[] = [
 export const latestUpdates: UpdateEntry[] = [
   {
     id:    'update-1',
-    date:  '06 / 26',
-    title: 'Building the new portfolio — intro animation shipped',
+    date:  '07 / 26',
+    title: 'Redesigned the portfolio — generative hero, terminal Billy page',
     tag:   'Building',
   },
   {
     id:    'update-2',
-    date:  '06 / 15',
-    title: 'Researching editorial layout and typographic systems',
+    date:  '06 / 26',
+    title: 'Accepted into the Duke–DKU Presence Lab (Bass Connections)',
     tag:   'Research',
   },
   {
     id:    'update-3',
-    date:  '05 / 30',
-    title: 'Finished Next.js App Router deep-dive',
+    date:  '11 / 25',
+    title: 'Took 1st place at the DKU Vibe Coding Marathon',
     tag:   'Recently Finished',
   },
   {
     id:    'update-4',
-    date:  '05 / 12',
-    title: 'Learning Framer Motion — advanced animation patterns',
-    tag:   'Learning',
+    date:  '04 / 25',
+    title: 'Shipped Radikal — an AI-powered Mandarin learning app',
+    tag:   'Recently Finished',
   },
 ]
 
@@ -87,7 +86,7 @@ export const latestUpdates: UpdateEntry[] = [
 
 export const contactData: ContactData = {
   headline: "Let's work together",
-  subline:  'Open to freelance, collaboration, and interesting problems.',
+  subline:  'Open to research, freelance, and interesting problems.',
   ctaLabel: 'Get in touch',
   ctaHref:  '/contact',
 }

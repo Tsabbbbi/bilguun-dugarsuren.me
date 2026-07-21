@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
+import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Cursor } from '@/components/system/Cursor'
+import { Grain } from '@/components/system/Grain'
+import { profile } from '@/data/profile'
 import '@/styles/globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -8,17 +11,23 @@ const spaceGrotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+})
+
 export const metadata: Metadata = {
   title: {
-    default: 'Bilguun Dugarsuren',
-    template: '%s — Bilguun Dugarsuren',
+    default: profile.name,
+    template: '%s — ' + profile.name,
   },
-  description: '',
+  description: profile.bio,
   openGraph: {
-    title: 'Bilguun Dugarsuren',
-    description: '',
+    title: profile.name,
+    description: profile.bio,
     url: 'https://bilguun-dugarsuren.me',
-    siteName: 'Bilguun Dugarsuren',
+    siteName: profile.name,
     locale: 'en_US',
     type: 'website',
   },
@@ -26,8 +35,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body>
+        <Grain />
+        <Cursor />
+        {children}
+      </body>
     </html>
   )
 }

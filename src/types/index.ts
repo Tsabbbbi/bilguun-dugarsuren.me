@@ -93,6 +93,21 @@ export interface Experience {
   org: string
   period: string       // e.g. "2023 – Present"
   description: string
+  bullets?: string[]
+}
+
+export interface EducationEntry {
+  id: string
+  school: string
+  degree: string
+  period: string
+}
+
+export interface AwardEntry {
+  id: string
+  title: string
+  org?: string
+  date: string          // "YYYY" or "YYYY-MM"
 }
 
 export interface AboutData {
@@ -101,6 +116,9 @@ export interface AboutData {
   resumeHref: string   // path to PDF in /public, e.g. "/resume.pdf"
   languages: Language[]
   experience: Experience[]
+  education: EducationEntry[]
+  awards: AwardEntry[]
+  interests: string[]
 }
 
 /* ─── Journey ───────────────────────────────────────────────────────────────── */
