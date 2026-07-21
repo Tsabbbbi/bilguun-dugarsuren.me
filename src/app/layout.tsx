@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Grain } from '@/components/system/Grain'
 import { Nav } from '@/components/layout/Nav'
+import { ClickSpark } from '@/components/ui/ClickSpark'
 import { profile } from '@/data/profile'
 import '@/styles/globals.css'
 
@@ -43,6 +44,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Grain />
         <Nav />
+        <ClickSpark
+          sparkColor="#DCC9A3"
+          sparkSize={12}
+          sparkRadius={22}
+          sparkCount={8}
+          duration={520}
+          easing="ease-out"
+          extraScale={1.1}
+        />
         {children}
       </body>
     </html>
