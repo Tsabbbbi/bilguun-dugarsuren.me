@@ -1,28 +1,27 @@
 import type { Metadata } from 'next'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { Section } from '@/components/layout/Section'
+import { Reveal } from '@/components/system/Reveal'
+import { BillyTerminal } from '@/components/billy/BillyTerminal'
 
 export const metadata: Metadata = { title: 'Billy' }
-
-/**
- * Implementation options — choose one before building:
- *
- * A — AI chatbot (Claude API, streaming, system prompt = your bio + projects)
- * B — Animated digital persona (character, quotes, mood — no backend)
- * C — Terminal / typewriter interface (keyboard-driven easter egg)
- */
 
 export default function BillyPage() {
   return (
     <PageContainer>
-      <Section size="lg">
-        <p className="text-label text-muted mb-8">Billy — placeholder</p>
+      <Section size="lg" aria-label="Billy">
+        <Reveal>
+          <p className="text-label text-muted mb-2">BILLY</p>
+          <p className="text-h2 text-foreground mb-4">A terminal, not a chatbot.</p>
+          <p className="text-body text-muted mb-10 max-w-lg">
+            No API, no backend — just a scripted shell that knows my resume. Type{' '}
+            <span className="text-mono text-accent">help</span> to get started.
+          </p>
+        </Reveal>
 
-        <div className="flex min-h-[60vh] items-center justify-center border border-dashed border-border">
-          <span className="text-label text-muted">
-            Billy — implementation TBD (A: chatbot · B: persona · C: terminal)
-          </span>
-        </div>
+        <Reveal delay={0.05}>
+          <BillyTerminal />
+        </Reveal>
       </Section>
     </PageContainer>
   )

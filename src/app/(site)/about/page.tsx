@@ -3,6 +3,8 @@
 import type { Metadata } from 'next'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { Section } from '@/components/layout/Section'
+import { Reveal } from '@/components/system/Reveal'
+import { Magnetic } from '@/components/system/Magnetic'
 import { aboutData } from '@/data/about'
 import { profile } from '@/data/profile'
 import { skills } from '@/data/skills'
@@ -25,54 +27,85 @@ export default function AboutPage() {
     <PageContainer>
       <Section size="lg" aria-label="About">
 
-        <p className="text-label text-muted mb-2">ABOUT</p>
-        <p className="text-h2 text-foreground mb-12">{profile.name}</p>
+        <Reveal>
+          <p className="text-label text-muted mb-2">ABOUT</p>
+          <p className="text-h2 text-foreground mb-4">{profile.name}</p>
+          <p className="text-body text-muted mb-12 max-w-xl">{profile.title} — {profile.bio}</p>
+        </Reveal>
 
         <div className="grid gap-16 lg:grid-cols-3">
 
-          {/* Left column — bio + languages */}
+          {/* Left column — bio, experience, education, resume */}
           <div className="lg:col-span-2 flex flex-col gap-12">
 
             {/* Biography */}
-            <div>
+            <Reveal>
               <p className="text-label text-muted mb-4">Biography</p>
               <div className="flex flex-col gap-4">
                 {aboutData.bio.map((para, i) => (
                   <p key={i} className="text-body text-foreground leading-relaxed">{para}</p>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
             {/* Experience */}
-            <div>
+            <Reveal>
               <p className="text-label text-muted mb-4">Experience</p>
               <div className="flex flex-col gap-px bg-border">
                 {aboutData.experience.map((exp) => (
-                  <div key={exp.id} className="flex flex-col gap-1 bg-background py-6">
+                  <div key={exp.id} className="flex flex-col gap-2 bg-background py-6">
                     <div className="flex flex-wrap items-baseline justify-between gap-4">
                       <span className="text-body text-foreground">{exp.role}</span>
-                      <span className="text-label text-muted/40 tabular-nums">{exp.period}</span>
+                      <span className="text-label text-mono text-muted/40 tabular-nums">{exp.period}</span>
                     </div>
-                    <span className="text-label text-muted">{exp.org}</span>
+                    <span className="text-label text-accent">{exp.org}</span>
                     <p className="text-label text-muted/60 mt-1">{exp.description}</p>
+                    {exp.bullets && exp.bullets.length > 0 && (
+                      <ul className="mt-2 flex flex-col gap-1.5 list-none">
+                        {exp.bullets.map((b, i) => (
+                          <li key={i} className="text-label text-muted/50 flex gap-2">
+                            <span className="text-accent/60 shrink-0">—</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
+
+            {/* Education */}
+            <Reveal>
+              <p className="text-label text-muted mb-4">Education</p>
+              <div className="flex flex-col gap-px bg-border">
+                {aboutData.education.map((edu) => (
+                  <div key={edu.id} className="flex flex-col gap-1 bg-background py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-body text-foreground">{edu.school}</span>
+                      <span className="text-label text-muted">{edu.degree}</span>
+                    </div>
+                    <span className="text-label text-mono text-muted/40 tabular-nums shrink-0">{edu.period}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
 
             {/* Resume */}
             {aboutData.resumeHref && (
-              <div>
+              <Reveal>
                 <p className="text-label text-muted mb-4">Resume</p>
-                <a
-                  href={aboutData.resumeHref}
-                  className="text-label text-muted hover:text-foreground underline underline-offset-4 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Download PDF ↗
-                </a>
-              </div>
+                <Magnetic strength={0.2}>
+                  <a
+                    href={aboutData.resumeHref}
+                    className="inline-block text-label text-muted hover:text-foreground underline underline-offset-4 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download PDF ↗
+                  </a>
+                </Magnetic>
+              </Reveal>
             )}
           </div>
 
@@ -80,13 +113,13 @@ export default function AboutPage() {
           <div className="flex flex-col gap-10">
 
             {/* Location */}
-            <div>
+            <Reveal>
               <p className="text-label text-muted mb-2">Location</p>
               <p className="text-body text-foreground">{aboutData.location}</p>
-            </div>
+            </Reveal>
 
             {/* Languages */}
-            <div>
+            <Reveal delay={0.05}>
               <p className="text-label text-muted mb-4">Languages</p>
               <div className="flex flex-col gap-2">
                 {aboutData.languages.map((lang) => (
@@ -96,10 +129,25 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
+
+            {/* Awards */}
+            <Reveal delay={0.1}>
+              <p className="text-label text-muted mb-4">Awards</p>
+              <div className="flex flex-col gap-3">
+                {aboutData.awards.map((award) => (
+                  <div key={award.id} className="flex flex-col gap-0.5">
+                    <span className="text-label text-foreground">{award.title}</span>
+                    <span className="text-label text-muted/50 text-mono">
+                      {award.org ? `${award.org} · ` : ''}{award.date}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
 
             {/* Skills */}
-            <div>
+            <Reveal delay={0.15}>
               <p className="text-label text-muted mb-4">Skills</p>
               <div className="flex flex-col gap-6">
                 {SKILL_CATEGORIES.map((cat) => {
@@ -117,7 +165,19 @@ export default function AboutPage() {
                   )
                 })}
               </div>
-            </div>
+            </Reveal>
+
+            {/* Interests */}
+            <Reveal delay={0.2}>
+              <p className="text-label text-muted mb-4">Interests</p>
+              <div className="flex flex-wrap gap-2">
+                {aboutData.interests.map((interest) => (
+                  <span key={interest} className="text-label text-muted/60 border border-border px-2 py-1">
+                    {interest}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
 
           </div>
         </div>

@@ -1,18 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 
-export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false)
-
-  useEffect(() => {
+function subscribe(query: string) {
+  return (callback: () => void) => {
     const mql = window.matchMedia(query)
-    setMatches(mql.matches)
+    mql.addEventListener('change', callback)
+    return () => mql.removeEventListener('change', callback)
+  }
+}
 
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches)
-    mql.addEventListener('change', handler)
-    return () => mql.removeEventListener('change', handler)
-  }, [query])
-
-  return matches
+/** Subscribes to a media query via useSyncExternalStore — safe for SSR/hydration. */
+export function useMediaQuery(query: string): boolean {
+  return useSyncExternalStore(
+    subscribe(query),
+    () => window.matchMedia(query).matches,
+    () => false
+  )
 }
