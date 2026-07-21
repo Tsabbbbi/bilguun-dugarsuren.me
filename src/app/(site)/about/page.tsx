@@ -1,4 +1,4 @@
-// Edit content in src/data/about.ts, src/data/profile.ts, src/data/skills.ts.
+// Edit content in src/data/about.ts, src/data/profile.ts, src/data/skills.ts, src/data/journey.ts.
 
 import type { Metadata } from 'next'
 import { PageContainer } from '@/components/layout/PageContainer'
@@ -8,7 +8,8 @@ import { Magnetic } from '@/components/system/Magnetic'
 import { aboutData } from '@/data/about'
 import { profile } from '@/data/profile'
 import { skills } from '@/data/skills'
-import type { SkillCategory } from '@/types'
+import { journeyEntries } from '@/data/journey'
+import type { SkillCategory, JourneyType } from '@/types'
 
 export const metadata: Metadata = { title: 'About' }
 
@@ -22,9 +23,24 @@ const SKILL_CATEGORY_LABELS: Record<SkillCategory, string> = {
 
 const SKILL_CATEGORIES: SkillCategory[] = ['languages', 'frameworks', 'tools', 'design', 'other']
 
+const JOURNEY_TYPE_LABELS: Record<JourneyType, string> = {
+  accomplishment: 'Accomplishments',
+  learning:       'Learning',
+  certification:  'Certifications',
+  note:           'Notes',
+}
+
+const JOURNEY_GROUPS: JourneyType[] = ['accomplishment', 'learning', 'certification', 'note']
+
+function shortDate(date: string): string {
+  return date.length >= 7 ? date.slice(0, 7) : date
+}
+
 export default function AboutPage() {
   return (
     <PageContainer>
+
+      {/* ── Bio header ──────────────────────────────────────────────────────── */}
       <Section size="lg" aria-label="About">
 
         <Reveal>
@@ -183,6 +199,53 @@ export default function AboutPage() {
         </div>
 
       </Section>
+
+      {/* ── Journey timeline (merged from /journey) ─────────────────────────── */}
+      <Section size="lg" divided aria-label="Journey">
+
+        <Reveal>
+          <p className="text-label text-muted mb-2">JOURNEY</p>
+          <p className="text-h2 text-foreground mb-12">Milestones</p>
+        </Reveal>
+
+        <div className="flex flex-col gap-16">
+          {JOURNEY_GROUPS.map((type) => {
+            const entries = journeyEntries.filter((e) => e.type === type)
+            if (entries.length === 0) return null
+            return (
+              <div key={type}>
+                <Reveal>
+                  <p className="text-label text-muted mb-6 border-b border-border pb-4">
+                    {JOURNEY_TYPE_LABELS[type]}
+                  </p>
+                </Reveal>
+                <div className="flex flex-col gap-px bg-border">
+                  {entries.map((entry, i) => (
+                    <Reveal key={entry.id} delay={Math.min(i, 4) * 0.05}>
+                      <div className="flex flex-col gap-1 bg-background py-6 sm:flex-row sm:gap-12">
+                        <span className="text-label text-mono text-accent tabular-nums shrink-0 w-24">
+                          {shortDate(entry.date)}
+                        </span>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-body text-foreground">{entry.title}</span>
+                          {entry.institution && (
+                            <span className="text-label text-muted">{entry.institution}</span>
+                          )}
+                          {entry.body && (
+                            <p className="text-label text-muted/60 mt-1">{entry.body}</p>
+                          )}
+                        </div>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+      </Section>
+
     </PageContainer>
   )
 }

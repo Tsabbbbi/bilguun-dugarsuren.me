@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { IntroAnimation } from '@/components/home/IntroAnimation'
 import { Hero } from '@/components/home/Hero'
 import { SelectedWork } from '@/components/sections/SelectedWork'
-import { LatestUpdates } from '@/components/sections/LatestUpdates'
+import { SkillsMarquee } from '@/components/sections/SkillsMarquee'
+import { AboutTeaser } from '@/components/sections/AboutTeaser'
 import { ContactPreview } from '@/components/sections/ContactPreview'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
@@ -27,7 +28,8 @@ export default function HomePage() {
         <Hero />
 
         <SelectedWork />
-        <LatestUpdates />
+        <SkillsMarquee />
+        <AboutTeaser />
         <ContactPreview />
 
         <Footer />

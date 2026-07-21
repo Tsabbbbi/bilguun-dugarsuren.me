@@ -6,9 +6,12 @@ import { GenerativeFigure } from './GenerativeFigure'
 export function HeroFigure() {
   return (
     <div className="relative flex h-full w-full items-end justify-center overflow-hidden">
-      {/* Accent red circle — sits behind the figure */}
+      {/* Soft green glow — sits behind the figure */}
       <div
-        className="absolute bottom-[-15%] left-1/2 aspect-square w-[85%] -translate-x-1/2 rounded-full bg-accent"
+        className="absolute bottom-[-20%] left-1/2 aspect-square w-[90%] -translate-x-1/2 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(142,182,155,0.12) 0%, rgba(35,83,71,0.06) 45%, transparent 70%)',
+        }}
         aria-hidden="true"
       />
 

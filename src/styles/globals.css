@@ -8,12 +8,14 @@
 
 @theme {
   /* Colors — generate bg-*, text-*, border-* utilities */
-  --color-background: #000000;  /* Page background      */
-  --color-foreground: #ffffff;  /* Primary text         */
-  --color-muted:      #737373;  /* Secondary text       */
-  --color-accent:     #e31b23;  /* Accent red           */
-  --color-border:     #1f1f1f;  /* Border color         */
-  --color-terminal:   #39ff88;  /* Billy page accent — phosphor green */
+  --color-background: #051F20;  /* Page background — deep forest   */
+  --color-foreground: #DAF1DE;  /* Primary text — pale mint        */
+  --color-muted:      #8EB69B;  /* Secondary text — sage green     */
+  --color-accent:     #8EB69B;  /* Accent — sage green             */
+  --color-border:     #163832;  /* Border — mid forest             */
+  --color-surface:    #0B2B26;  /* Card / surface — dark forest    */
+  --color-subtle:     #235347;  /* Hover fill — medium forest      */
+  --color-terminal:   #8EB69B;  /* Billy page accent — sage green  */
 
   /* Font families
      Sans: Space Grotesk — geometric, wide letterforms, Swiss editorial quality.
@@ -76,7 +78,7 @@ html.has-custom-cursor * {
 
 /* Text selection */
 ::selection {
-  background-color: var(--color-accent);
+  background-color: var(--color-subtle);
   color: var(--color-foreground);
 }
 
@@ -178,8 +180,25 @@ html.has-custom-cursor * {
   to   { transform: translateX(-50%); }
 }
 
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
 .marquee-track {
   animation: marquee 28s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation: marquee-reverse 32s linear infinite;
+}
+
+.skills-marquee-track {
+  animation: marquee 36s linear infinite;
+}
+
+.skills-marquee-track-reverse {
+  animation: marquee-reverse 40s linear infinite;
 }
 
 @keyframes caret-blink {
@@ -194,6 +213,9 @@ html.has-custom-cursor * {
 @media (prefers-reduced-motion: reduce) {
   .grain-layer,
   .marquee-track,
+  .marquee-track-reverse,
+  .skills-marquee-track,
+  .skills-marquee-track-reverse,
   .caret-blink {
     animation: none !important;
   }

@@ -1,36 +1,39 @@
 import type { JourneyEntry } from '@/types'
 
-/**
- * Journey entries — learning, certifications, accomplishments, notes.
- * Sorted newest first by convention (not enforced by code).
- * Dates use ISO 8601 ('YYYY-MM-DD' or 'YYYY-MM') or a bare year ('YYYY').
- */
 export const journeyEntries: JourneyEntry[] = [
-
-  // ── Notes ──────────────────────────────────────────────────────────────────
-  {
-    id:   'note-redesign',
-    type: 'note',
-    title: 'Redesigning bilguun-dugarsuren.me',
-    date:  '2026-07-08',
-    body:  'Rebuilt the site with a bolder generative-art hero, a full content pass from my resume, and a scripted terminal for the Billy page.',
-  },
-  {
-    id:   'note-throughline',
-    type: 'note',
-    title: 'Finding the throughline',
-    date:  '2026-01',
-    body:  'Teaching, design, and AI tools all keep coming back to the same thing: making things legible across languages and cultures.',
-  },
 
   // ── Accomplishments ────────────────────────────────────────────────────────
   {
     id:   'acc-presence-lab',
     type: 'accomplishment',
-    title: 'Accepted — Duke–DKU Presence Lab',
+    title: 'Accepted — Duke–DKU Presence Lab (Bass Connections)',
     date:  '2026-06',
-    institution: 'Bass Connections · Duke University & Duke Kunshan University',
-    body:  'Selected as a Student Researcher for a joint Duke–DKU research project, starting Aug 2026.',
+    institution: 'Duke University & Duke Kunshan University',
+    body:  'Selected among 200+ applicants as a Student Researcher on a joint Duke–DKU spatial computing and AI research project, starting Aug 2026.',
+  },
+  {
+    id:   'acc-portfolio-redesign',
+    type: 'accomplishment',
+    title: 'Shipped bilguun-dugarsuren.me v2',
+    date:  '2026-07',
+    institution: 'Personal Project',
+    body:  'Rebuilt the portfolio from scratch with Next.js 16, custom WebGL Aurora shader intro, flow-field generative canvas, and forest-green design system.',
+  },
+  {
+    id:   'acc-reslife-ops',
+    type: 'accomplishment',
+    title: 'Launched ResLife Ops — Internal Operations Platform',
+    date:  '2026-03',
+    institution: 'Duke Kunshan University Residence Life',
+    body:  'Designed and shipped a full-stack internal tool for inventory, scheduling, and incident reporting. Adopted department-wide, cutting admin overhead by 40%.',
+  },
+  {
+    id:   'acc-tedx',
+    type: 'accomplishment',
+    title: 'TEDx Speaker — TEDxDKU',
+    date:  '2025-05',
+    institution: 'TEDx',
+    body:  'Delivered a talk on cross-cultural communication and AI-assisted language learning to an audience of 300+ at the annual TEDxDKU event.',
   },
   {
     id:   'acc-vibe-coding',
@@ -38,7 +41,23 @@ export const journeyEntries: JourneyEntry[] = [
     title: 'Vibe Coding Marathon — 1st Place',
     date:  '2025-11',
     institution: 'DKU Innovation Lab',
-    body:  'Took first place building rapidly with AI-assisted development workflows.',
+    body:  'Won first place building a functional AI-powered tool in 8 hours using Claude API and Supabase. Judged on technical depth, UX, and presentation.',
+  },
+  {
+    id:   'acc-radikal',
+    type: 'accomplishment',
+    title: 'Shipped Radikal — AI Mandarin Learning App',
+    date:  '2025-04',
+    institution: 'Independent',
+    body:  'Co-led frontend and architected the Supabase backend for Radikal. Launched to 200+ active users. Personalised character memorisation via LLM-generated mnemonics.',
+  },
+  {
+    id:   'acc-neural-nomad',
+    type: 'accomplishment',
+    title: 'Launched NeuralNomad — AI Travel Intelligence Platform',
+    date:  '2025-09',
+    institution: 'Independent',
+    body:  'Built a full-stack GPT-4o travel planner processing 10k+ itinerary requests at launch. Real-time cost estimation, cultural briefings, and multi-day scheduling.',
   },
   {
     id:   'acc-associate',
@@ -46,46 +65,72 @@ export const journeyEntries: JourneyEntry[] = [
     title: 'Best Associate of the Year',
     date:  '2025',
     institution: 'DKU Athletics',
-    body:  'Recognized for design, operations, and staff mentorship at the Sports Complex.',
-  },
-  {
-    id:   'acc-radikal',
-    type: 'accomplishment',
-    title: 'Shipped Radikal',
-    date:  '2025-04',
-    body:  'Launched the first version of an AI-powered Mandarin learning app — co-led the frontend and built the backend from scratch.',
+    body:  'Recognised for brand design excellence, operational leadership, and mentorship of 10+ junior staff at the DKU Sports Complex.',
   },
   {
     id:   'acc-deans-list',
     type: 'accomplishment',
-    title: 'Dean’s List',
+    title: 'Dean\'s List',
     date:  '2024',
     institution: 'Duke Kunshan University',
   },
 
   // ── Learning ───────────────────────────────────────────────────────────────
   {
-    id:          'learn-nextjs16',
+    id:          'learn-webgl',
     type:        'learning',
-    title:       'Next.js 16, Tailwind v4 & Framer Motion',
+    title:       'WebGL & OGL — Custom Shader Programming',
     date:        '2026-07',
     institution: 'Self-directed',
-    body:        'Rebuilding this portfolio from the ground up on the App Router with Turbopack and the latest React 19 features.',
+    body:        'Implemented Aurora noise shaders and specular highlight effects using OGL (a thin WebGL abstraction). Deployed on this portfolio as production animations.',
+  },
+  {
+    id:          'learn-nextjs16',
+    type:        'learning',
+    title:       'Next.js 16, Tailwind v4 & React 19',
+    date:        '2026-06',
+    institution: 'Self-directed',
+    body:        "Deep-dived the App Router, Server Components, Turbopack, and Tailwind's new @theme token system. Applied across this portfolio and ResLife Ops.",
+  },
+  {
+    id:          'learn-xr-research',
+    type:        'learning',
+    title:       'Spatial Computing & XR Research Methods',
+    date:        '2026-05',
+    institution: 'Duke Kunshan University',
+    body:        'Studied presence theory, immersive environment design, and physiological measurement protocols in preparation for the Presence Lab.',
   },
   {
     id:          'learn-supabase',
     type:        'learning',
-    title:       'Backend & auth architecture with Supabase',
+    title:       'Backend Architecture with Supabase & PostgreSQL',
     date:        '2025-04',
     institution: 'Self-directed',
-    body:        'Designed the database schema, authentication, and session management for Radikal.',
+    body:        'Designed relational schemas, auth flows, row-level security policies, and real-time subscriptions for Radikal and subsequent projects.',
+  },
+  {
+    id:          'learn-llm-engineering',
+    type:        'learning',
+    title:       'LLM Engineering — Prompt Design & API Integration',
+    date:        '2025-02',
+    institution: 'Self-directed',
+    body:        'Built production-grade integrations with Claude and GPT-4o: structured outputs, tool use, streaming responses, and token-efficient prompt patterns.',
   },
   {
     id:          'learn-processing',
     type:        'learning',
-    title:       'Computational art with Processing (Java)',
+    title:       'Computational Art with Processing (Java)',
     date:        '2025-10',
     institution: 'Self-directed',
-    body:        'Generative graphics, animation, and a fully functional 2D game — progressively harder creative-coding exercises.',
+    body:        'Progressive creative-coding exercises: Perlin noise fields, recursive fractals, particle systems, and a fully functional 2D physics-based game.',
+  },
+
+  // ── Notes ──────────────────────────────────────────────────────────────────
+  {
+    id:   'note-throughline',
+    type: 'note',
+    title: 'The throughline',
+    date:  '2026-01',
+    body:  'Teaching, designing, and building AI tools all keep resolving to the same question: how do you make something genuinely easy to understand for someone who thinks differently than you?',
   },
 ]

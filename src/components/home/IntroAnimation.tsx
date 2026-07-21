@@ -2,61 +2,54 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Aurora } from '@/components/system/Aurora'
 
-type Phase = 'black' | 'flashlight' | 'name-first' | 'name-full' | 'fading'
+type Phase = 'hold' | 'showing' | 'fading'
 
 interface Props {
   children: React.ReactNode
 }
 
+const CHARS = ['h', 'e', 'l', 'l', 'o', '.']
+
 export function IntroAnimation({ children }: Props) {
   const prefersReducedMotion = useReducedMotion()
-  const [phase, setPhase] = useState<Phase>('black')
+  const [phase, setPhase] = useState<Phase>('hold')
   const [visible, setVisible] = useState(true)
   const didSkip = useRef(false)
 
   const skip = useCallback(() => {
     if (didSkip.current) return
     didSkip.current = true
-    setVisible(false)
+    setPhase('fading')
+    setTimeout(() => setVisible(false), 900)
   }, [])
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      skip()
+      setVisible(false)
       return
     }
 
     const timers = [
-      setTimeout(() => setPhase('flashlight'), 2000),
-      setTimeout(() => setPhase('name-first'), 2500),
-      setTimeout(() => setPhase('name-full'), 3000),
-      setTimeout(() => setPhase('fading'), 4200),
-      setTimeout(() => setVisible(false), 5000),
+      setTimeout(() => setPhase('showing'), 500),
+      setTimeout(() => setPhase('fading'),  2800),
+      setTimeout(() => setVisible(false),   3700),
     ]
 
     return () => timers.forEach(clearTimeout)
-  }, [prefersReducedMotion, skip])
+  }, [prefersReducedMotion])
 
-  // Any key skips
   useEffect(() => {
     const onKey = () => skip()
     window.addEventListener('keydown', onKey, { once: true })
     return () => window.removeEventListener('keydown', onKey)
   }, [skip])
 
-  const showFlashlight = phase !== 'black'
-  const showFirst = phase === 'name-first' || phase === 'name-full'
-  const showLast = phase === 'name-full'
-
   return (
     <>
-      {/* Homepage renders underneath — becomes visible as overlay fades */}
       {children}
 
-      {/* initial={false} prevents AnimatePresence from animating the overlay in on
-          first mount — without it, framer-motion infers opacity:0 as the entry
-          start state (matching the exit), causing the one-frame content flash. */}
       <AnimatePresence initial={false}>
         {visible && (
           <motion.div
@@ -64,59 +57,76 @@ export function IntroAnimation({ children }: Props) {
             initial={{ opacity: 1 }}
             animate={{ opacity: phase === 'fading' ? 0 : 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: phase === 'fading' ? 0.8 : 0, ease: 'easeInOut' }}
+            transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
             onClick={skip}
             aria-hidden="true"
           >
-            {/* Black base */}
-            <div className="absolute inset-0 bg-black" />
+            {/* Deep forest base */}
+            <div className="absolute inset-0" style={{ backgroundColor: '#051F20' }} />
 
-            {/* Flashlight aimed toward camera — elliptical radial gradient */}
-            <motion.div
+            {/* Aurora — fills the entire screen as animated background */}
+            <div className="absolute inset-0">
+              <Aurora
+                colorStops={['#163832', '#8EB69B', '#DAF1DE']}
+                amplitude={1.1}
+                blend={0.55}
+                speed={0.35}
+              />
+            </div>
+
+            {/* Darkening vignette so the text stays readable */}
+            <div
               className="absolute inset-0 pointer-events-none"
-              animate={{ opacity: showFlashlight ? 1 : 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
               style={{
                 background:
-                  'radial-gradient(ellipse 45% 60% at 50% 40%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 35%, transparent 65%)',
+                  'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(5,31,32,0.55) 100%)',
               }}
             />
 
-            {/* Name — centered */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none px-[var(--spacing-site-x)]">
-              <motion.span
-                className="text-display text-foreground block"
-                animate={{
-                  opacity: showFirst ? 1 : 0,
-                  y: showFirst ? 0 : 16,
-                }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              >
-                BILGUUN
-              </motion.span>
-              <motion.span
-                className="text-display text-foreground block"
-                animate={{
-                  opacity: showLast ? 1 : 0,
-                  y: showLast ? 0 : 16,
-                }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              >
-                DUGARSUREN
-              </motion.span>
+            {/* "hello." — letters slide up one by one */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+              <div className="flex items-baseline" aria-label="hello">
+                {CHARS.map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{
+                      opacity: phase === 'showing' ? 1 : 0,
+                      y:       phase === 'showing' ? 0 : 20,
+                    }}
+                    transition={{
+                      duration: 0.7,
+                      delay:    phase === 'showing' ? i * 0.07 : 0,
+                      ease:     [0.16, 1, 0.3, 1],
+                    }}
+                    style={{
+                      display:       'inline-block',
+                      fontFamily:    'var(--font-space-grotesk), system-ui, sans-serif',
+                      fontSize:      'clamp(3.5rem, 9vw, 7.5rem)',
+                      fontWeight:    300,
+                      fontStyle:     'italic',
+                      letterSpacing: '-0.02em',
+                      color:         '#DAF1DE',
+                      lineHeight:    1,
+                      textShadow:    '0 0 40px rgba(218,241,222,0.25)',
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </div>
             </div>
 
-            {/* Skip button — appears after 1.5s */}
-            <motion.button
-              className="absolute bottom-8 right-[var(--spacing-site-x)] text-label text-muted hover:text-foreground transition-colors"
+            {/* Skip hint */}
+            <motion.span
+              className="absolute bottom-8 right-[var(--spacing-site-x)] font-mono text-xs tracking-widest uppercase"
+              style={{ color: '#8EB69B' }}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 0.4 }}
-              onClick={(e) => { e.stopPropagation(); skip() }}
-              aria-label="Skip intro"
+              animate={{ opacity: phase === 'showing' ? 0.5 : 0 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
             >
-              SKIP
-            </motion.button>
+              click to skip
+            </motion.span>
           </motion.div>
         )}
       </AnimatePresence>

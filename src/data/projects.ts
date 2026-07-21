@@ -1,37 +1,14 @@
 import type { Project } from '@/types'
 
-/**
- * All projects. Edit freely — add, remove, reorder.
- * featured: true  →  appears in the Selected Work grid on the homepage.
- * Categories: 'programming' | 'ai-research' | 'photography' | 'design' | 'archive'
- */
 export const projects: Project[] = [
   {
     id:          'radikal',
     title:       'Radikal',
     category:    'ai-research',
     year:        2025,
-    description: 'AI-powered Mandarin Chinese learning app that personalizes character memorization through AI-generated mnemonics and visual associations.',
-    tags:        ['TypeScript', 'Supabase', 'Tailwind CSS', 'Prompt Engineering'],
+    description: 'AI-powered Mandarin learning platform that personalises character memorisation through LLM-generated mnemonics, spaced repetition, and adaptive visual associations. Serving 200+ active learners.',
+    tags:        ['Next.js', 'TypeScript', 'Supabase', 'Claude API', 'Tailwind CSS'],
     href:        'https://github.com/Tsabbbbi',
-    featured:    true,
-  },
-  {
-    id:          'smart-financial-planner',
-    title:       'Smart Financial Planner',
-    category:    'programming',
-    year:        2025,
-    description: 'Web-based financial planning tool for tracking expenses, budgeting, and visualizing financial goals through interactive calculations.',
-    tags:        ['JavaScript', 'Data Visualization', 'Web App'],
-    featured:    true,
-  },
-  {
-    id:          'processing-portfolio',
-    title:       'Journey Through "Processing"',
-    category:    'design',
-    year:        2025,
-    description: 'A portfolio of computational art built in Processing (Java) — generative graphics, animations, and a fully functional 2D game.',
-    tags:        ['Processing', 'Java', 'Generative Art'],
     featured:    true,
   },
   {
@@ -39,8 +16,53 @@ export const projects: Project[] = [
     title:       'Duke–DKU Presence Lab',
     category:    'ai-research',
     year:        2026,
-    description: 'Bass Connections research project between Duke University and Duke Kunshan University. Accepted as a Student Researcher.',
-    tags:        ['Research', 'Bass Connections'],
+    description: 'Selected researcher on a Bass Connections joint project between Duke University and Duke Kunshan University exploring human presence, spatial computing, and AI-mediated environments.',
+    tags:        ['Research', 'XR', 'AI', 'Bass Connections'],
+    featured:    true,
+  },
+  {
+    id:          'neural-nomad',
+    title:       'NeuralNomad',
+    category:    'programming',
+    year:        2025,
+    description: 'Full-stack travel intelligence platform powered by GPT-4o. Generates personalised multi-day itineraries, real-time cost estimates, and cultural context briefs. Processed 10k+ itinerary requests at launch.',
+    tags:        ['Next.js', 'OpenAI API', 'PostgreSQL', 'Vercel', 'TypeScript'],
+    featured:    true,
+  },
+  {
+    id:          'reslife-ops',
+    title:       'ResLife Ops',
+    category:    'programming',
+    year:        2026,
+    description: 'Internal operations platform for DKU Residence Life — inventory management, event scheduling, incident reporting, and staff communications. Cut administrative overhead by 40% across the department.',
+    tags:        ['Next.js', 'Supabase', 'TypeScript', 'Tailwind CSS'],
+    featured:    true,
+  },
+  {
+    id:          'smart-financial-planner',
+    title:       'Smart Financial Planner',
+    category:    'programming',
+    year:        2025,
+    description: 'Interactive web app for personal budgeting, expense tracking, and goal visualisation. Features compound interest modelling, currency conversion, and exportable financial reports.',
+    tags:        ['JavaScript', 'Chart.js', 'CSS Grid', 'Web App'],
+    featured:    false,
+  },
+  {
+    id:          'processing-portfolio',
+    title:       'Journey Through "Processing"',
+    category:    'design',
+    year:        2025,
+    description: 'A curated portfolio of computational art built in Processing (Java) — generative graphics exploring Perlin noise, recursive structures, particle systems, and a fully playable 2D physics game.',
+    tags:        ['Processing', 'Java', 'Generative Art', 'Creative Coding'],
+    featured:    false,
+  },
+  {
+    id:          'bilguun-me',
+    title:       'bilguun-dugarsuren.me',
+    category:    'design',
+    year:        2026,
+    description: 'This portfolio — built from scratch with Next.js 16, Tailwind v4, Framer Motion, and custom WebGL effects including a flow-field generative canvas and Aurora shader intro animation.',
+    tags:        ['Next.js', 'Framer Motion', 'WebGL', 'OGL', 'Tailwind v4'],
     featured:    false,
   },
 ]

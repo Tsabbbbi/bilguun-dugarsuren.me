@@ -25,12 +25,12 @@ export function SelectedWork() {
               href="/work"
               className="group flex aspect-[4/3] flex-col bg-background"
             >
-              <div className="flex h-full w-full flex-col justify-between border border-border m-px p-6 transition-colors group-hover:border-accent">
+              <div className="flex h-full w-full flex-col justify-between bg-surface border border-border m-px p-6 transition-colors duration-300 group-hover:border-accent/60 group-hover:bg-subtle/40">
                 <div className="flex flex-col gap-1">
                   <span className="text-label text-foreground">{item.title}</span>
-                  <span className="text-label text-muted">{item.category.replace('-', ' ')} · {item.year}</span>
+                  <span className="text-label text-muted/60">{item.category.replace('-', ' ')} · {item.year}</span>
                 </div>
-                <p className="text-label text-muted/60">{item.description}</p>
+                <p className="text-label text-muted/70 leading-relaxed">{item.description}</p>
                 <div className="flex gap-2 flex-wrap">
                   {item.tags.map((tag) => (
                     <span key={tag} className="text-label text-muted/40">{tag}</span>

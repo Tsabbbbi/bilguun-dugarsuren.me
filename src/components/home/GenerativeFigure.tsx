@@ -36,7 +36,7 @@ export function GenerativeFigure() {
       canvas.width = width * dpr
       canvas.height = height * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      ctx.fillStyle = '#000'
+      ctx.fillStyle = '#051F20'
       ctx.fillRect(0, 0, width, height)
     }
     resize()
@@ -60,7 +60,7 @@ export function GenerativeFigure() {
       if (!visible) return
       t += 0.0032
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+      ctx.fillStyle = 'rgba(5, 31, 32, 0.12)'
       ctx.fillRect(0, 0, width, height)
 
       for (const p of particles) {
@@ -73,7 +73,7 @@ export function GenerativeFigure() {
           Object.assign(p, spawn())
         }
 
-        ctx.fillStyle = 'rgba(227, 27, 35, 0.65)'
+        ctx.fillStyle = 'rgba(142, 182, 155, 0.55)'
         ctx.fillRect(p.x, p.y, 1.5, 1.5)
       }
 
